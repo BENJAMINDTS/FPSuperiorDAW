@@ -1,0 +1,8 @@
+<!ELEMENT estudiantes (estudiante+)>
+<!ELEMENT estudiante (nombre, edad, carrera)>
+<!ATTLIST estudiante
+          id CDATA #REQUIRED
+          genero CDATA #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT edad (#PCDATA)>
+<!ELEMENT carrera (#PCDATA)>
