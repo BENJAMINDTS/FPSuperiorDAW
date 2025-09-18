@@ -9,3 +9,4 @@ Actualmente, estoy en mi primer año donde trabajaremos en proyectos con:
 - JavaScript <img src="https://img.icons8.com/color/48/000000/javascript.png" width="20" height="20">
 - XML <img src="https://img.icons8.com/color/48/000000/xml-file.png" width="20" height="20">
 - SQL <img src="https://img.icons8.com/color/48/000000/sql.png" width="20" height="20">
+-PHP  <img src="https://img.icons8.com/color/48/000000/php.png" width="20" height="20">
