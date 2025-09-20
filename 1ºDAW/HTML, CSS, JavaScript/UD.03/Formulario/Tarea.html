@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulario de Validación</title>
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+    <body>
+        <form id="miFormulario">
+            <div class="form-group">
+                <label for="nombreCompleto">Nombre y Apellidos:</label>
+                <input type="text" id="nombreCompleto" name="nombreCompleto">
+                <button type="button" onclick="validarNombreCompleto()">VALIDAR</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="nombreUsuario">Nombre de Usuario:</label>
+                <input type="text" id="nombreUsuario" name="nombreUsuario">
+                <button type="button" onclick="validarNombreUsuario()">VALIDAR</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+                <button type="button" onclick="validarEmail()">VALIDAR</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password">
+                <button type="button" onclick="validarPassword()">VALIDAR</button>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" onclick="controlTotal()">CONTROL TOTAL + ENVIO</button>
+                <button type="button" onclick="limpiarCampos()">LIMPIAR LOS CAMPOS</button>
+            </div>
+        </form>
+        <div id="mensajes"></div>
+        <script>
+            function validarNombreCompleto() {
+                const nombreCompleto = document.getElementById('nombreCompleto');
+                const mensajes = document.getElementById('mensajes');
+                mensajes.innerHTML = '';
+                
+                if (nombreCompleto.value.trim() === '') {
+                    nombreCompleto.classList.add('errores');
+                    mensajes.innerHTML += 'El nombre y apellidos no pueden estar vacíos.<br>';
+                } else {
+                    nombreCompleto.classList.remove('errores');
+                }
+        }
+
+            function validarNombreUsuario() {
+                const nombreUsuario = document.getElementById('nombreUsuario');
+                const mensajes = document.getElementById('mensajes');
+                mensajes.innerHTML = '';
+                
+                if (nombreUsuario.value.trim().length < 3) {
+                    nombreUsuario.classList.add('errores');
+                    mensajes.innerHTML += 'El nombre de usuario debe tener al menos 3 caracteres.<br>';
+                } else {
+                    nombreUsuario.classList.remove('errores');
+                }
+            }
+
+            function validarEmail() {
+                const email = document.getElementById('email');
+                const mensajes = document.getElementById('mensajes');
+                mensajes.innerHTML = '';
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    email.classList.add('errores');
+                    mensajes.innerHTML += 'El email no es válido.<br>';
+                } else {
+                    email.classList.remove('errores');
+                }
+            }
+
+            function validarPassword() {
+                const password = document.getElementById('password');
+                const mensajes = document.getElementById('mensajes');
+                mensajes.innerHTML = '';
+                
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
+                if (!passwordRegex.test(password.value)) {
+                    password.classList.add('errores');
+                    mensajes.innerHTML += 'La contraseña debe tener al menos 5 caracteres, una mayúscula, una minúscula y un número.<br>';
+                } else {
+                    password.classList.remove('errores');
+                }
+            }
+
+            function controlTotal() {
+                validarNombreCompleto();
+                validarNombreUsuario();
+                validarEmail();
+                validarPassword();
+                
+                const nombreCompleto = document.getElementById('nombreCompleto');
+                const nombreUsuario = document.getElementById('nombreUsuario');
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                const mensajes = document.getElementById('mensajes');
+                
+                if (nombreCompleto.classList.contains('errores') || nombreUsuario.classList.contains('errores') || email.classList.contains('errores') || password.classList.contains('errores')) {
+                    mensajes.innerHTML += 'Por favor, corrige los errores antes de enviar.<br>';
+                } else {
+                    mensajes.innerHTML = 'Formulario enviado correctamente.';
+                }
+            }
+
+            function limpiarCampos() {
+                const nombreCompleto = document.getElementById('nombreCompleto');
+                const nombreUsuario = document.getElementById('nombreUsuario');
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                const mensajes = document.getElementById('mensajes');
+                
+                nombreCompleto.value = '';
+                nombreUsuario.value = '';
+                email.value = '';
+                password.value = '';
+                nombreCompleto.classList.remove('errores');
+                nombreUsuario.classList.remove('errores');
+                email.classList.remove('errores');
+                password.classList.remove('errores');
+                mensajes.innerHTML = '';
+            }
+        </script>
+    </body>
+</html>

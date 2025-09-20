@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalogo SYSTEM "catalogo.dtd">
+<catalogo>
+<producto>
+    <nombre>lince_iberico</nombre>
+    <descripcion>malaCarne</descripcion>
+    <precio>1700</precio>
+    <stock>3</stock>
+</producto>
+</catalogo>

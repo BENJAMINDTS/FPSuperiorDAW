@@ -1,6 +1,0 @@
-<!ELEMENT blog (entrada+)>
-<!ELEMENT entrada (titulo, contenido, fecha, autor)>
-<!ELEMENT titulo (#PCDATA)>
-<!ELEMENT contenido (#PCDATA)>
-<!ELEMENT fecha (#PCDATA)>
-<!ELEMENT autor (#PCDATA)>

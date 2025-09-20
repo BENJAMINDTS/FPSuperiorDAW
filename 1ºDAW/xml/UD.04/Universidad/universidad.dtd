@@ -1,0 +1,12 @@
+<!ELEMENT university (department+)>
+<!ELEMENT department (name, faculty, courses)>
+<!ATTLIST department id CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT faculty (professor+)>
+<!ELEMENT professor (name, title)>
+<!ATTLIST professor id CDATA #REQUIRED>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT courses (course+)>
+<!ELEMENT course (title, credits)>
+<!ATTLIST course  code CDATA #REQUIRED>
+<!ELEMENT credits (#PCDATA)>
