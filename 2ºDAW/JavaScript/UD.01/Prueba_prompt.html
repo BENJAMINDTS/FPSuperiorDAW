@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt</title>
+</head>
+<body>
+  <h1>Example</h1>
+  <!--Boton que lanza una alerta de prompt-->
+  <button type="button" onclick="pedirDatos()">Click Me!</button>
+  <script>
+    // Funcion que muestra una alerta de prompt
+    function pedirDatos() {
+      // Usamos prompt para pedir al usuario que ingrese su nombre
+      let nombre = prompt("Por favor, ingresa tu nombre:");
+      if (nombre) {
+        alert("Hola, " + nombre + "!");
+      } else {
+        alert("No ingresaste ningún nombre.");
+      }
+    }
+
+  </script>
+</body>

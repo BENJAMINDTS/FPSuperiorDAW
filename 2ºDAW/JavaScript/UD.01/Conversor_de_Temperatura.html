@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Temperatura</title>
+</head>
+<body>
+  <h1>Conversor de Temperatura</h1>
+  <button type="button" onclick="convertir()">Convertir Temperatura</button>
+
+  <script>
+    // Solicita al usuario la temperatura a convertir
+    function solicitarTemperatura() {
+      let valor = prompt("Ingresa la temperatura a convertir:");
+      if (valor === null) return null; // Si el usuario cancela
+      valor = parseFloat(valor); // Convierte el valor a número
+      if (isNaN(valor)) {
+        alert("Por favor, ingresa un valor numérico."); // Valida que sea un número
+        return null;
+      }
+      return valor;
+    }
+
+    // Solicita al usuario el tipo de conversión
+    function solicitarTipoConversion() {
+      let tipo = prompt("Escribe 'C' para Celsius a Fahrenheit o 'F' para Fahrenheit a Celsius:");
+      if (tipo === null) return null; // Si el usuario cancela
+      tipo = tipo.trim().toUpperCase(); // Limpia y convierte a mayúsculas
+      if (tipo !== "C" && tipo !== "F") {
+        alert("Tipo de conversión no válido."); // Valida la opción
+        return null;
+      }
+      return tipo;
+    }
+
+    // Convierte de Celsius a Fahrenheit
+    function celsiusAFahrenheit(celsius) {
+      return (celsius * 9/5) + 32;
+    }
+
+    // Convierte de Fahrenheit a Celsius
+    function fahrenheitACelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5/9;
+    }
+
+    // Muestra el resultado al usuario
+    function mostrarResultado(mensaje) {
+      alert(mensaje);
+    }
+
+    // Función principal que coordina la conversión
+    function convertir() {
+      // Solicita la temperatura y el tipo de conversión
+      let valor = solicitarTemperatura();
+      if (valor === null) return;
+
+      let tipo = solicitarTipoConversion();
+      if (tipo === null) return;
+
+      // Realiza la conversión y muestra el resultado
+      let resultado = "";
+      if (tipo === "C") {
+        let fahrenheit = celsiusAFahrenheit(valor);
+        resultado = valor + "°C son " + fahrenheit.toFixed(2) + "°F"; //To fixed(2) limita a 2 decimales
+      } else {
+        let celsius = fahrenheitACelsius(valor);
+        resultado = valor + "°F son " + celsius.toFixed(2) + "°C";
+      }
+      mostrarResultado(resultado);
+    }
+  </script>
+</body>
+</html>

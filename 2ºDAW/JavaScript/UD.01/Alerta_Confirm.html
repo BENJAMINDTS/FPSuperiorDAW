@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmacion</title>
+</head>
+<body>
+  <h1>Example</h1>
+  <!--Boton que lanza una alerta de confirmacion-->
+  <button type="button" onclick="confirmAction()">Click Me!</button>
+  <script>
+    // Funcion que muestra una alerta de confirmacion
+    function confirmAction() {
+      // Usamos confirm para mostrar un cuadro de dialogo con OK y Cancelar
+      let userConfirmed = confirm("¿Quieres seguir?");
+      if (userConfirmed) {
+        alert("Has presionado OK!");
+      } else {
+        alert("Has presionado Cancelar!");
+      }
+    }
+  </script>
+</body>
