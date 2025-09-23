@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Cambiar Color</title>
+    <style>
+        #div1 {
+            background-color: rgb(255, 186, 186);
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <h2>Ejercicio 2: Cambiar color de un div</h2>
+        <p>Este es un div que cambiará de color.</p>
+        <button type="button" onclick="change_div_color();">
+        Cambiar a azul
+    </button>
+    </div>
+    <script>
+        function change_div_color() {
+            document.getElementById("div1").style.backgroundColor = "blue";
+        }
+    </script>
+</body>
+</html>

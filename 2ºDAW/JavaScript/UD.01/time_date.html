@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 8 - Automatic Time and Date</title>
+    <script>
+        window.onload = function show_time_date() {
+            const d = new Date();
+            const n = d.toLocaleTimeString();
+            const m = d.toLocaleDateString();
+            document.getElementById("p1").innerHTML = "Hora: " + n + "<br>Fecha: " + m;
+        }
+    </script>
+</head>
+<body>
+    <h2>Ejercicio 7 - Automatic Time and Date</h2>
+    <p id="p1">Se va a mostrar el color y hora actuales</p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 3 - Cambiar valor de un imput</title>
+</head>
+<body>
+  <h2>Ejercicio 3 - Cambiar valor de un imput</h2>
+  <input type="text" id="miInput" value="Texto original">
+  <button type="button" onclick="changeInputValue();">
+    Cambiar valor
+  </button>
+  <script>
+    function changeInputValue() {
+      document.getElementById("miInput").value = "Nuevo texto";
+    }
+  </script>
+</body>
+</html>
