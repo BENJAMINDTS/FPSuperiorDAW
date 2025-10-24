@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicios de Objetos del Navegador</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Ejercicios de Objetos del Navegador</h1>
+			<p class="subtitle">Manipulación del DOM y propiedades del navegador</p>
+		</header>
+
+		<!-- Ejercicio 1: Manipulación del Objeto window -->
+		<section class="exercise" id="exercise1">
+			<h2>Ejercicio 1: Manipulación del Objeto window</h2>
+			<p>Crea una página HTML que contenga dos botones: uno para abrir una nueva ventana y otro para cerrarla.</p>
+			<div class="button-group">
+				<button type="button" id="openWindow">Abrir Nueva Ventana</button>
+				<button type="button" id="closeWindow" class="danger">Cerrar Ventana</button>
+			</div>
+			<div class="info-box">
+				<p id="windowStatus">Estado: No hay ventana abierta</p>
+			</div>
+		</section>
+
+		<!-- Ejercicio 2: Información del Navegador con navigator -->
+		<section class="exercise" id="exercise2">
+			<h2>Ejercicio 2: Información del Navegador con navigator</h2>
+			<p>Información sobre el navegador y sus propiedades.</p>
+			<div class="button-group">
+				<button type="button" id="showBrowserInfo">Mostrar Información del Navegador</button>
+			</div>
+			<div class="info-box" id="browserInfo">
+				<!-- La información del navegador se mostrará aquí -->
+			</div>
+		</section>
+
+		<!-- Ejercicio 3: Interactuar con el Objeto document -->
+		<section class="exercise" id="exercise3">
+			<h2>Ejercicio 3: Interactuar con el Objeto document</h2>
+			<p>Crea una página HTML que contenga una lista de elementos y un botón para añadir nuevos elementos.</p>
+			<div class="button-group">
+				<button type="button" id="addListItem">Añadir Elemento a la Lista</button>
+			</div>
+			<ul id="itemList">
+			</ul>
+		</section>
+
+		<!-- Ejercicio 4: Información sobre la URL con location -->
+		<section class="exercise" id="exercise4">
+			<h2>Ejercicio 4: Información sobre la URL con location</h2>
+			<p>Muestra información completa de la URL actual y permite redirigir a otra página.</p>
+			<div class="button-group">
+				<button type="button" id="showUrlInfo">Mostrar Información de la URL</button>
+				<button type="button" id="redirectPage" class="success">Redirigir a Otra Página</button>
+			</div>
+			<div class="info-box" id="urlInfo">
+				<!-- La información de la URL se mostrará aquí -->
+			</div>
+		</section>
+
+		<!-- Ejercicio 5: Navegación en el Historial con history -->
+		<section class="exercise" id="exercise5">
+			<h2>Ejercicio 5: Navegación en el Historial con history</h2>
+			<p>Permite navegar por el historial del navegador y muestra información sobre él.</p>
+			<div class="button-group">
+				<button type="button" id="goBack" class="danger">Ir Atrás</button>
+				<button type="button" id="goForward">Ir Adelante</button>
+			</div>
+			<div class="info-box">
+				<p id="historyInfo">Longitud del historial: <span id="historyLength">-</span></p>
+			</div>
+		</section>
+
+		<!-- Ejercicio 6: Información de la Pantalla con screen -->
+		<section class="exercise" id="exercise6">
+			<h2>Ejercicio 6: Información de la Pantalla con screen</h2>
+			<p>Muestra información sobre la resolución y características de la pantalla.</p>
+			<div class="button-group">
+				<button type="button" id="showScreenInfo">Mostrar Información de la Pantalla</button>
+			</div>
+			<div class="info-box" id="screenInfo">
+				<!-- La información de la pantalla se mostrará aquí -->
+			</div>
+		</section>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>
