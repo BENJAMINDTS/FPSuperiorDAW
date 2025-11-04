@@ -1,0 +1,26 @@
+Tarea 1 - Cookie Basica
+
+Pasos para comprobar manualmente:
+
+1. Acceder a set_cookie.php en el navegador
+   - Se redirigira automaticamente a leer_cookie.php
+
+2. En leer_cookie.php se debe mostrar:
+   - "Cookie Encontrada"
+   - "Nombre: usuario"
+   - "Valor: alumno123"
+   - "Fecha estimada de expiracion: YYYY-MM-DD" (7 dias en el futuro)
+
+3. Verificar en las herramientas de desarrollador del navegador:
+   - Cookie "usuario" con valor "alumno123"
+   - Fecha de expiracion correcta (7 dias desde la creacion)
+
+4. Si la cookie no existe, se mostrara:
+   - "No hay cookie disponible"
+   - Mensaje explicativo
+
+Valores esperados:
+- Nombre cookie: usuario
+- Valor: alumno123
+- Caducidad: 7 dias
+- Formato fecha: YYYY-MM-DD
