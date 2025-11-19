@@ -40,8 +40,8 @@ Tarea/
 
 Ejecutar cada ejercicio individualmente:
 
-python RA03_A/ejercicio1.py
-python RA03_D/ejercicio5.py
+- python RA03_A/ejercicio1.py
+- python RA03_D/ejercicio5.py
 
 ## Autor
 
