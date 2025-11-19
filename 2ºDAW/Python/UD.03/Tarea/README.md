@@ -6,16 +6,16 @@
 
 ## Estructura del Proyecto
 
-Tarea/
-├── RA03_A/
-│   ├── ejercicio1.py
-│   └── ejercicio2.py
-├── RA03_B/
-│   └── ejercicio3.py
-├── RA03_C/
-│   └── ejercicio4.py
-└── RA03_D/
-    └── ejercicio5.py
+Tarea/  
+├── RA03_A/  
+│   ├── ejercicio1.py  
+│   └── ejercicio2.py  
+├── RA03_B/  
+│   └── ejercicio3.py  
+├── RA03_C/  
+│   └── ejercicio4.py  
+└── RA03_D/  
+    └── ejercicio5.py  
 
 ## Descripción de Ejercicios
 
