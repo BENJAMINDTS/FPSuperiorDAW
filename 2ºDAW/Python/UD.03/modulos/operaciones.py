@@ -1,16 +1,17 @@
-def suma (num1, num2):
-  return num1 + num2
+def sumar (a, b):
+    """Devuelve la suma de dos números."""
+    return a + b
 
-def resta (num1, num2):
-  return num1 - num2
-
-def multiplicacion (num1, num2):
-  return num1 * num2
-
-def division (num1, num2):
-  if num2 == 0:
-    return "Error: División por cero"
-  return num1 / num2
-
-if __name__ == "__main__":
-  exit()  # Evita la ejecución del código de prueba al importar el módulo
+def restar (a, b):
+    """Devuelve la resta de dos números."""
+    return a - b
+  
+def multiplicar (a, b):
+    """Devuelve el producto de dos números."""
+    return a * b
+  
+def dividir (a, b):
+    """Devuelve la división de dos números. Lanza una excepción si el divisor es cero."""
+    if b == 0:
+        raise ValueError("No se puede dividir por cero.")
+    return a / b
