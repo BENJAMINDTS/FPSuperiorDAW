@@ -1,0 +1,138 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.button-container {
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn.reset {
+    background-color: #f44336;
+}
+
+.btn.reset:hover {
+    background-color: #da190b;
+}
+
+.output {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.output h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.console-output {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    border: 1px solid #4a5568;
+}
+
+.console-line {
+    margin-bottom: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid #4a5568;
+}
+
+.console-line:last-child {
+    border-bottom: none;
+}
+
+.console-line.success {
+    color: #68d391;
+}
+
+.console-line.warning {
+    color: #faf089;
+}
+
+.console-line.error {
+    color: #fc8181;
+}
+
+.time {
+    color: #a0aec0;
+    font-size: 12px;
+}
+
+.info {
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.info strong {
+    color: #333;
+}
+
+
+
+
+

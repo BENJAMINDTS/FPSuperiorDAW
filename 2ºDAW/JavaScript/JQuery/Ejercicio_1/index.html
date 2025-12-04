@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio de jQuery - Funcionalidades Interactivas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Ejercicio de jQuery - Funcionalidades Interactivas</h1>
+  </div>
+
+  <!-- Sección 1: Ocultar párrafos -->
+  <div class="container">
+    <h2>1. Ocultar Párrafos</h2>
+    <p>Este es el primer párrafo. Contiene información de ejemplo para demostrar la funcionalidad de ocultar párrafos.
+    </p>
+    <p>Este es el segundo párrafo. Al hacer clic en el botón, todos los párrafos de esta sección desaparecerán.</p>
+    <p>Este es el tercer párrafo. Puedes ver cómo jQuery facilita la manipulación del DOM con muy poco código.</p>
+    <button type="button" id="hide-paragraphs">Ocultar Párrafos</button>
+    <button type="button" id="show-paragraphs">Mostrar Párrafos</button>
+  </div>
+
+  <!-- Sección 2: Mostrar imagen al pasar el ratón -->
+  <div class="container">
+    <h2>2. Mostrar Imagen al Pasar el Ratón</h2>
+    <div type="button" id="hover-text">Pasa el ratón sobre este texto para mostrar una imagen</div>
+    <div class="image-container">
+      <img type="button" id="hover-image" src="imagen.jpg"
+        alt="Imagen mostrada al pasar el ratón">
+    </div>
+  </div>
+
+  <!-- Sección 3: Cambiar color de fondo aleatorio -->
+  <div class="container">
+    <h2>3. Color de Fondo Aleatorio</h2>
+    <p>Haz clic en el botón para cambiar el color de fondo de toda la página a un color aleatorio.</p>
+    <button type="button" id="random-color">Color Aleatorio</button>
+  </div>
+
+  <!-- Sección 4: Mostrar contenido de campo de texto -->
+  <div class="container">
+    <h2>4. Mostrar Contenido de Campo de Texto</h2>
+    <p>Escribe algo en el campo de texto y haz clic en el botón para verlo en una alerta.</p>
+    <input type="text" id="text-input" placeholder="Escribe tu mensaje aquí...">
+    <button type="button" id="show-text">Mostrar Texto</button>
+  </div>
+
+  <!-- Sección 5: Cambiar color de fondo con botones -->
+  <div class="container">
+    <h2>5. Cambiar Color de Fondo</h2>
+    <p>Haz clic en cualquiera de estos botones para cambiar el color de fondo de la página.</p>
+    <button type="button" id="red-btn" class="color-button">Rojo</button>
+    <button type="button" id="blue-btn" class="color-button">Azul</button>
+    <button type="button" id="green-btn" class="color-button">Verde</button>
+    <button type="button" id="reset-color" class="color-button">Reset</button>
+  </div>
+
+  <!-- Seccion 6 Cambia de color al pasar el raton por encima -->
+  <div class="container">
+    <h2>6. Cambiar Color al Pasar el Ratón</h2>
+    <p>Pasa el ratón sobre este texto para cambiar su color de fondo.</p>
+    <div type="button" id="color-hover-text" class="hover-color-box">
+      Pasa el ratón por aquí
+    </div>
+  </div>
+
+  <!-- Seccion 7 ocultar un elemento li -->
+  <div class="container">
+    <h2>7. Ocultar Elemento de Lista</h2>
+    <ul>
+      <li>Elemento 1</li>
+      <li >Elemento 2</li>
+      <li id="hide-li">Elemento 3 (Pasa el raton sobre mi)</li>
+      <li>Elemento 4</li>
+    </ul>
+  </div>
+
+  <div class="container footer">
+    Ejercicio de jQuery - Funcionalidades Interactivas
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Nuestro script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
