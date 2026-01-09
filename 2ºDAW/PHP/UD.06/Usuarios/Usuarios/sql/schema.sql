@@ -1,1 +1,0 @@
-CREATE TABLE `daw`.`usuarios2` (`nombre` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(150) NOT NULL ) ENGINE = InnoDB;
