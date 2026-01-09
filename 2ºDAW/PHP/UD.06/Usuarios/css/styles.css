@@ -1,0 +1,179 @@
+/* Reseteo básico y fuente global */
+* {
+    box_sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9; /* Gris muy suave de fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+/* La tarjeta del formulario */
+.container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para que no se estire demasiado */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Estilos de los inputs y labels */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px 15px;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Efecto al hacer clic en el input */
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Botón de envío */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Mensajes de alerta (Éxito y Error) */
+.alerta {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alerta-exito {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alerta-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive para móviles muy pequeños */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+        box-shadow: none; /* Quitamos sombra en móvil para diseño plano */
+        background: transparent;
+    }
+}
+/* ... (Todo tu CSS anterior sigue igual) ... */
+
+/* ESTILOS NUEVOS PARA LA TABLA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilo para el enlace de volver */
+.btn-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+.acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    }
+
+    .search-box {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    }
+
+    .search-box input {
+    margin: 0;
+    }
+
+    .btn-mini {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border-radius: 4px;
+    color: white;
+    }
+
+    .btn-edit {
+    background: #ffc107;
+    color: #333;
+    }
+
+    .btn-del {
+    background: #dc3545;
+    }
