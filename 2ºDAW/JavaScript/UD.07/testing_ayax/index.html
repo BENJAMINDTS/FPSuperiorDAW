@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <script>
+        // Variable global para el objeto XMLHttpRequest
+        var xhttp;
+
+        /**
+         * Inicializa la petición AJAX y configura el destino.
+         */
+        function cargarDoc() {
+            // Verificación de compatibilidad del navegador
+            if (window.XMLHttpRequest) {
+                // Código para navegadores modernos
+                xhttp = new XMLHttpRequest();
+            } else {
+                // Código para navegadores antiguos (IE6, IE5)
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            // Asigna la función que manejará el cambio de estado
+            xhttp.addEventListener("readystatechange", gestionarRespuesta, false);
+            
+            // Configura la petición (Método GET, archivo destino, asíncrono)
+            xhttp.open("GET", "ajax_info.txt", true);
+            
+            // Envía la petición al servidor
+            xhttp.send();
+        }
+
+        /**
+         * Procesa la respuesta del servidor cuando la petición se completa.
+         */
+        function gestionarRespuesta() {
+            // readyState 4: petición finalizada y respuesta lista
+            // status 200: el servidor respondió "OK"
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                // Inserta el contenido recibido en el elemento con id "destino"
+                document.getElementById("destino").innerHTML = xhttp.responseText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>El objeto XMLHttpRequest</h1>
+    <hr>
+    <p id="destino">Permite a AJAX cambiar este texto</p>
+    <button type="button" onclick="cargarDoc();">Cambiar el contenido</button>
+</body>
+</html>
