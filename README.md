@@ -33,3 +33,21 @@ Estas son las principales tecnologías y lenguajes con los que trabajo en este c
 El código de este repositorio sigue estándares de desarrollo, incluyendo:
 - Documentación de código mediante **PHPDoc** y Javadoc.
 - Estructura MVC en proyectos de servidor.
+
+---
+## 🗂️ Organización del Curso
+
+El repositorio está estructurado por años académicos. Haz clic en las asignaturas para navegar directamente a su contenido:
+
+### [📂 2º DAW](./2ºDAW) (Año Actual)
+Enfoque en desarrollo Full Stack y Servidor.
+- **[PHP](./2ºDAW/PHP)**: Desarrollo Web en Entorno Servidor (DWES).
+- **[JavaScript](./2ºDAW/JavaScript)**: Desarrollo Web en Entorno Cliente (DWEC).
+- **[Python](./2ºDAW/Python)**: Scripting y automatización.
+
+### [📂 1º DAW](./1ºDAW) (Finalizado)
+Fundamentos de programación, bases de datos y maquetación.
+- **[JAVA](./1ºDAW/JAVA)**: Programación orientada a objetos.
+- **[HTML, CSS, JavaScript](./1ºDAW/HTML,%20CSS,%20JavaScript)**: Diseño e interfaces web.
+- **[SQL](./1ºDAW/SQL)**: Gestión de Bases de Datos.
+- **[xml](./1ºDAW/xml)**: Lenguajes de marcas y transmisión de datos.
