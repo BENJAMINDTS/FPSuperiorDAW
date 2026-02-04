@@ -1,45 +1,113 @@
-
 package com.mycompany.coches;
 
-public class coche { //Declaramos las variable necesarias
-    String marca;
-    String color;
-    double velocidad;
+/**
+ * Representa la entidad Coche con sus atributos básicos y acciones de
+ * movimiento.
+ *
+ * * @author BenjaminDTS
+ *
+ * @version 1.0
+ */
+public class coche {
 
-    public coche(String marca, String color, double velocidad) { //Constructor
-        this.marca = marca;
-        this.color = color;
-        this.velocidad = velocidad;
-    }
+	/**
+	 * @var String marca Nombre del fabricante del coche
+	 */
+	String marca;
+	/**
+	 * @var String color Tono cromático de la carrocería
+	 */
+	String color;
+	/**
+	 * @var double velocidad Magnitud actual de rapidez en km/h
+	 */
+	double velocidad;
 
-    public void setmarca(String marca) { //Metodo set de la variable "marca"
-        this.marca = marca;
-    }
+	/**
+	 * Constructor para inicializar un objeto coche con valores específicos.
+	 *
+	 * * @param marca Marca del vehículo.
+	 * 
+	 * @param color     Color del vehículo.
+	 * @param velocidad Velocidad inicial.
+	 */
+	public coche(String marca, String color, double velocidad) {
+		this.marca = marca;
+		this.color = color;
+		this.velocidad = velocidad;
+	}
 
-    public void setdicolor(String color) { //Metodo set de la variable "color"
-        this.color = color;
-    }
+	/**
+	 * Establece la marca del coche.
+	 *
+	 * @param marca Nombre de la marca.
+	 */
+	public void setmarca(String marca) {
+		this.marca = marca;
+	}
 
-    public void setvelocidad(double velocidad) { //Metodo set de la variable "velocidad"
-        this.velocidad = velocidad;
-    }
+	/**
+	 * Establece el color del coche.
+	 *
+	 * @param color Nombre del color.
+	 */
+	public void setdicolor(String color) {
+		this.color = color;
+	}
 
-    public String getmarca() { //Metodo get de la variable "marca"
-        return marca;
-    }
+	/**
+	 * Actualiza la velocidad actual del coche.
+	 *
+	 * @param velocidad Nueva velocidad en double.
+	 */
+	public void setvelocidad(double velocidad) {
+		this.velocidad = velocidad;
+	}
 
-    public String getcolor() { //Metodo get de la variable "color"
-        return color;
-    }
+	/**
+	 * Obtiene la marca almacenada.
+	 *
+	 * @return String marca.
+	 */
+	public String getmarca() {
+		return marca;
+	}
 
-    public double getvelocidad() { //Metodo get de la variable "velocidad"
-        return velocidad;
-    }
-    public double aumentavelocidad(){ //Metodo para aumentar la velocidad
-        return velocidad+10;
-    }
-    public double disminuyevelocidad(){ //Metodo para disminuir la velocidad
-        return velocidad-5;
-    }
-} 
+	/**
+	 * Obtiene el color del vehículo.
+	 *
+	 * @return String color.
+	 */
+	public String getcolor() {
+		return color;
+	}
 
+	/**
+	 * Obtiene la velocidad actual registrada.
+	 *
+	 * @return double velocidad.
+	 */
+	public double getvelocidad() {
+		return velocidad;
+	}
+
+	/**
+	 * Incrementa la velocidad actual en 10 unidades.
+	 *
+	 * @return double Nueva velocidad tras el aumento.
+	 */
+	public double aumentavelocidad() {
+		this.velocidad += 10;
+		return velocidad;
+	}
+
+	/**
+	 * Reduce la velocidad actual en 5 unidades.
+	 *
+	 * @return double Nueva velocidad tras la disminución.
+	 */
+	public double disminuyevelocidad() {
+		this.velocidad -= 5;
+		return velocidad;
+	}
+}

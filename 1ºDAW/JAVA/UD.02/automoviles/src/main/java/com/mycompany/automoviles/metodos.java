@@ -1,13 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.automoviles;
 
 /**
+ * Clase de utilidad que contiene métodos auxiliares para la gestión de
+ * automóviles.
  *
- * @author Usuario
+ * * @author BenjaminDTS
  */
 public class metodos {
-    
+
+    /**
+     * Proporciona una cadena de texto informativa sobre el proceso de carga.
+     *
+     * * @return String Mensaje descriptivo.
+     */
+    public String info() {
+        return "Iniciando sistema de captura de datos de automóviles...";
+    }
 }
