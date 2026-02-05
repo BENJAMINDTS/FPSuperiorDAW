@@ -4,25 +4,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tienda implements Iterable<Producto> { 
+/**
+ * Clase que representa un establecimiento comercial.
+ * Gestiona una colección de productos y permite su iteración.
+ * * @author BenjaminDTS
+ * 
+ * @version 1.0
+ */
+public class Tienda implements Iterable<Producto> {
     private String nombre;
     private String descripcion;
     private String direccion;
     private List<Producto> productos;
 
+    /**
+     * Constructor con validaciones de integridad de datos.
+     * * @param nombre Nombre de la tienda (no nulo/vacío).
+     * 
+     * @param descripcion Descripción del negocio.
+     * @param direccion   Ubicación física.
+     * @param productos   Lista inicial de existencias.
+     */
     public Tienda(String nombre, String descripcion, String direccion, List<Producto> productos) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre de la tienda no puede estar vacío.");
-        }
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La descripción de la tienda no puede estar vacía.");
-        }
-        if (direccion == null || direccion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La dirección de la tienda no puede estar vacía.");
-        }
-        if (productos == null) {
-            throw new IllegalArgumentException("La lista de productos no puede ser nula.");
-        }
+        validarString(nombre, "nombre");
+        validarString(descripcion, "descripción");
+        validarString(direccion, "dirección");
+        if (productos == null)
+            throw new IllegalArgumentException("La lista no puede ser nula.");
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,55 +38,28 @@ public class Tienda implements Iterable<Producto> {
         this.productos = new ArrayList<>(productos); // Copia defensiva
     }
 
-    // Método para agregar un producto
-    public void agregarProducto(Producto producto) {
-        if (producto == null) {
-            throw new IllegalArgumentException("El producto no puede ser nulo.");
+    private void validarString(String valor, String campo) {
+        if (valor == null || valor.trim().isEmpty()) {
+            throw new IllegalArgumentException("El " + campo + " no puede estar vacío.");
         }
+    }
+
+    /**
+     * Añade un producto a la lista de existencias.
+     * * @param producto Objeto Producto validado.
+     */
+    public void agregarProducto(Producto producto) {
+        if (producto == null)
+            throw new IllegalArgumentException("Producto nulo.");
         productos.add(producto);
     }
 
-    // Método para eliminar un producto por código
+    /**
+     * Elimina productos cuyo código coincida con el parámetro.
+     * * @param codigo Código alfanumérico del producto.
+     */
     public void eliminarProducto(String codigo) {
-        productos.removeIf(producto -> producto.getCodigo().equals(codigo));
-    }
-
-    // Getters y Setters
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre de la tienda no puede estar vacío.");
-        }
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La descripción de la tienda no puede estar vacía.");
-        }
-        this.descripcion = descripcion;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        if (direccion == null || direccion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La dirección de la tienda no puede estar vacía.");
-        }
-        this.direccion = direccion;
-    }
-
-    public List<Producto> getProductos() {
-        return new ArrayList<>(productos); // Copia defensiva
+        productos.removeIf(p -> p.getCodigo().equals(codigo));
     }
 
     @Override
@@ -86,13 +67,32 @@ public class Tienda implements Iterable<Producto> {
         return productos.iterator();
     }
 
-    @Override
-    public String toString() {
-        return "Tienda{" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", productos=" + productos +
-                '}';
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * 
+     * @return Descripción del negocio.
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * 
+     * @return Dirección física.
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * 
+     * @return Lista de productos.
+     */
+    public List<Producto> getProductos() {
+        return new ArrayList<>(productos);
     }
 }
