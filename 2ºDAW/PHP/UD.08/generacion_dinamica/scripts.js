@@ -1,6 +1,6 @@
 /**
  * Script principal para la resolución de ejercicios de jQuery y Ajax.
- * @author Gemini
+ * @author BenjaminDTS
  * @version 1.0
  */
 
