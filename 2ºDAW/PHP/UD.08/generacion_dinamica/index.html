@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio de jQuery y Ajax</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <div>
+        <h1 id="titulo-principal">Bienvenido</h1>
+        <button type="button" id="btn-ejercicio1">Ejercicio 1: Saludar</button>
+      </div>
+    </section>
+    <hr>
+    <section>
+      <h2>Lista y Contador</h2>
+      <div class="contador-box">
+        Valor actual: <span id="visor-contador">0</span>
+        <button type="button" id="btn-incrementar">Incrementar (+1)</button>
+      </div>
+      <input type="text" id="input-tarea" placeholder="Nueva tarea...">
+      <button type="button" id="btn-agregar-lista">Agregar a la lista</button>
+      <button type="button" id="btn-eliminar-ultimo" class="btn-danger">Eliminar última tarea (Ej 5)</button>
+      <ul id="lista-dinamica">
+        <li>Tarea de ejemplo inicial</li>
+      </ul>
+    </section>
+
+    <hr>
+    <section>
+      <h2>Manipulación de Bloques</h2>
+      <p id="parrafo-estilo">Este párrafo cambia de estilo con el Ejercicio 6.</p>
+      <button type="button" id="btn-cambiar-estilo">Cambiar Estilo</button>
+      <button type="button" id="btn-tarjeta">Agregar Tarjeta (Ej 3)</button>
+      <button type="button" id="btn-insertar-especifico">Insertar en posición específica (Ej 4)</button>
+
+      <div id="contenedor-parrafos">
+        <p class="p-bloque">Párrafo Original 1</p>
+        <p class="p-bloque">Párrafo Original 2</p>
+      </div>
+
+      <div id="contenedor-tarjetas"></div>
+    </section>
+
+    <hr>
+    <section>
+      <h2>Carga de API (Ajax)</h2>
+      <button type="button" id="btn-cargar-ajax">Cargar Usuarios vía Ajax</button>
+      <div id="output-ajax"></div>
+    </section>
+  </main>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
