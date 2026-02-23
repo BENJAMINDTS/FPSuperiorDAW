@@ -1,4 +1,3 @@
-
 package cuentasbancarias;
 
 import java.util.ArrayList;
@@ -6,13 +5,39 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import modeloBancario.*;
+import modeloBancario.CCorriente;
+import modeloBancario.Cliente;
+import modeloBancario.Cuenta;
+import modeloBancario.CuentaAhorro;
+import modeloBancario.OperacionesBancarias;
+import modeloBancario.Transaccion;
 import modeloBancario.exepciones.MontoInvalidoException;
 import modeloBancario.exepciones.SaldoInsuficienteException;
 
+/**
+ * Clase principal que actúa como interfaz de usuario (CLI) para el sistema
+ * bancario.
+ * Gestiona el flujo de registro, autenticación y operaciones financieras de los
+ * clientes,
+ * integrando todas las reglas de negocio del modelo bancario.
+ * * @author BenjaminDTS
+ * 
+ * @version 1.0
+ */
 public class App {
-    private static List<Cliente> clientes = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    /**
+     * Lista estática que actúa como base de datos temporal de clientes registrados
+     */
+    private static final List<Cliente> clientes = new ArrayList<>();
+
+    /** Escáner global para la captura de entradas de usuario por consola */
+    private static final Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Punto de entrada de la aplicación. Gestiona el ciclo de vida del Menú
+     * Principal.
+     * * @param args Argumentos de la línea de comandos.
+     */
     public static void main(String[] args) {
         boolean salir = false;
 
@@ -23,33 +48,36 @@ public class App {
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer del scanner
+            try {
+                int opcion = scanner.nextInt();
+                scanner.nextLine(); // Limpiar el buffer
 
-            switch (opcion) {
-                case 1:
-                    registrarCliente();
-                    break;
-                case 2:
-                    iniciarSesion();
-                    break;
-                case 3:
-                    salir = true;
-                    System.out.println("Saliendo del sistema...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                switch (opcion) {
+                    case 1 -> registrarCliente();
+                    case 2 -> iniciarSesion();
+                    case 3 -> {
+                        salir = true;
+                        System.out.println("Saliendo del sistema...");
+                    }
+                    default -> System.out.println("Opción no válida. Intente de nuevo.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Por favor, ingrese un número entero.");
+                scanner.nextLine(); // Limpiar entrada errónea
             }
         }
     }
 
-    // Método para registrar un nuevo cliente
+    /**
+     * Captura los datos de un nuevo cliente y lo añade al sistema.
+     * Valida la unicidad del DNI y la robustez de la contraseña mediante el
+     * constructor de Cliente.
+     */
     private static void registrarCliente() {
         System.out.println("\n--- Registro de Cliente ---");
         System.out.print("Ingrese su DNI: ");
         String dni = scanner.nextLine();
 
-        // Verificar si el cliente ya está registrado
         if (buscarClientePorDni(dni) != null) {
             System.out.println("El cliente con DNI " + dni + " ya está registrado.");
             return;
@@ -69,11 +97,13 @@ public class App {
             clientes.add(nuevoCliente);
             System.out.println("Cliente registrado exitosamente.");
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error de Seguridad: " + e.getMessage());
         }
     }
 
-    // Método para iniciar sesión
+    /**
+     * Valida las credenciales del usuario y otorga acceso al menú de operaciones.
+     */
     private static void iniciarSesion() {
         System.out.println("\n--- Iniciar Sesión ---");
         System.out.print("Ingrese su DNI: ");
@@ -85,13 +115,18 @@ public class App {
 
         if (cliente != null && cliente.getContrasena().equals(contrasena)) {
             System.out.println("Inicio de sesión exitoso. Bienvenido, " + cliente.getNombre() + ".");
-            menuCliente(cliente); // Mostrar menú del cliente
+            menuCliente(cliente);
         } else {
             System.out.println("DNI o contraseña incorrectos.");
         }
     }
 
-    // Método para buscar un cliente por su DNI
+    /**
+     * Busca un objeto Cliente en la lista maestra mediante su DNI.
+     * * @param dni Documento de identidad a buscar.
+     * 
+     * @return El objeto Cliente si existe, null en caso contrario.
+     */
     private static Cliente buscarClientePorDni(String dni) {
         for (Cliente cliente : clientes) {
             if (cliente.getDni().equals(dni)) {
@@ -101,12 +136,16 @@ public class App {
         return null;
     }
 
-    // Menú del cliente después de iniciar sesión
+    /**
+     * Menú secundario para usuarios autenticados. Permite gestionar cuentas y
+     * operar fondos.
+     * * @param cliente El cliente que ha iniciado sesión.
+     */
     private static void menuCliente(Cliente cliente) {
         boolean cerrarSesion = false;
 
         while (!cerrarSesion) {
-            System.out.println("\n--- Menú del Cliente ---");
+            System.out.println("\n--- Menú del Cliente (" + cliente.getNombre() + ") ---");
             System.out.println("1. Crear cuenta de ahorro");
             System.out.println("2. Crear cuenta corriente");
             System.out.println("3. Ver cuentas");
@@ -115,97 +154,39 @@ public class App {
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer del scanner
+            scanner.nextLine();
 
             switch (opcion) {
-                case 1:
-                    crearCuentaAhorro(cliente);
-                    break;
-                case 2:
-                    crearCCorriente(cliente);
-                    break;
-                case 3:
-                    verCuentas(cliente);
-                    break;
-                case 4:
+                case 1 -> crearCuentaAhorro(cliente);
+                case 2 -> crearCCorriente(cliente);
+                case 3 -> verCuentas(cliente);
+                case 4 -> {
                     try {
                         realizarOperaciones(cliente);
-                    } catch (MontoInvalidoException e) {
-                        System.out.println("Monto invalido");
-                        e.printStackTrace();
-                    } catch (SaldoInsuficienteException e) {
-                        System.out.println("Saldo insuficiente");
-                        e.printStackTrace();
+                    } catch (MontoInvalidoException | SaldoInsuficienteException e) {
+                        System.err.println("Error en la operación: " + e.getMessage());
                     }
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     cerrarSesion = true;
                     System.out.println("Cerrando sesión...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                }
+                default -> System.out.println("Opción no válida.");
             }
         }
     }
 
-    // Método para crear una cuenta de ahorro
-    private static void crearCuentaAhorro(Cliente cliente) {
-        try {
-            System.out.print("Ingrese el saldo inicial: ");
-        double saldo = scanner.nextDouble();
-        System.out.print("Ingrese el interés variable: ");
-        double interesVariable = scanner.nextDouble();
-        System.out.print("Ingrese el saldo mínimo: ");
-        double saldoMinimo = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-
-        CuentaAhorro cuentaAhorro = new CuentaAhorro(saldo, cliente, interesVariable, saldoMinimo);
-        cliente.agregarCuenta(cuentaAhorro);
-        System.out.println("Cuenta de ahorro creada exitosamente.");
-        } catch (InputMismatchException e) {
-            System.out.println("Error: Entrada inválida. Por favor, ingrese un número válido.");
-            scanner.nextLine();
-        }
-    }
-
-    // Método para crear una cuenta corriente
-    private static void crearCCorriente(Cliente cliente) {
-       try {
-        System.out.print("Ingrese el saldo inicial: ");
-        double saldo = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-
-        CCorriente cCorriente = new CCorriente(saldo, cliente);
-        cliente.agregarCuenta(cCorriente);
-        System.out.println("Cuenta corriente creada exitosamente.");
-       } catch (InputMismatchException e) {
-              System.out.println("Error: Entrada inválida. Por favor, ingrese un número válido.");
-              scanner.nextLine();
-       }
-    }
-
-    // Método para ver las cuentas del cliente
-    private static void verCuentas(Cliente cliente) {
-        List<Cuenta> cuentas = cliente.getCuentas();
-
-        if (cuentas.isEmpty()) {
-            System.out.println("No tiene cuentas registradas.");
-        } else {
-            System.out.println("\n--- Cuentas ---");
-            for (Cuenta cuenta : cuentas) {
-                System.out.println("Número de cuenta: " + cuenta.getNumeroCuenta());
-                System.out.println("Saldo: " + cuenta.getSaldo());
-                System.out.println("Tipo de cuenta: " + (cuenta instanceof CuentaAhorro ? "Ahorro" : "Corriente"));
-                System.out.println("-----------------------------");
-            }
-        }
-    }
-
-    // Método para realizar operaciones en una cuenta
+    /**
+     * Orquesta el submenú de operaciones transaccionales para una cuenta
+     * específica.
+     * * @param cliente Cliente titular.
+     * 
+     * @throws MontoInvalidoException     Si el monto no es válido.
+     * @throws SaldoInsuficienteException Si no hay fondos suficientes.
+     */
     private static void realizarOperaciones(Cliente cliente) throws MontoInvalidoException, SaldoInsuficienteException {
         System.out.print("Ingrese el número de cuenta: ");
         String numeroCuenta = scanner.nextLine();
-
         Cuenta cuenta = cliente.buscarCuenta(numeroCuenta);
 
         if (cuenta == null) {
@@ -214,151 +195,115 @@ public class App {
         }
 
         boolean volver = false;
-
         while (!volver) {
-            System.out.println("\n--- Operaciones en la Cuenta " + numeroCuenta + " ---");
-            System.out.println("1. Depositar");
-            System.out.println("2. Retirar");
-            System.out.println("3. Transferir");
-            System.out.println("4. Consultar saldo");
-            System.out.println("5. Ver historial de transacciones");
-            System.out.println("6. Cancelar última transacción");
-            System.out.println("7. Actualizar saldo (solo cuentas de ahorro)");
-            System.out.println("8. Volver al menú anterior");
-            System.out.print("Seleccione una opción: ");
-
+            System.out.println("\n--- Operaciones: " + numeroCuenta + " ---");
+            System.out.println(
+                    "1. Depositar  2. Retirar  3. Transferir  4. Saldo  5. Historial  6. Cancelar Ult.  7. Actualizar (Ahorro)  8. Volver");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer del scanner
+            scanner.nextLine();
 
             switch (opcion) {
-                case 1:
-                    depositarEnCuenta(cuenta);
-                    break;
-                case 2:
-                    retirarDeCuenta(cuenta);
-                    break;
-                case 3:
-                        transferirDesdeCuenta(cuenta, cliente);
-                    break;
-                case 4:
-                    consultarSaldo(cuenta);
-                    break;
-                case 5:
-                    verHistorialTransacciones(cuenta);
-                    break;
-                case 6:
-                    cancelarUltimaTransaccion(cuenta);
-                    break;
-                case 7:
-                    actualizarSaldo(cuenta);
-                    break;
-                case 8:
-                    volver = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                case 1 -> depositarEnCuenta(cuenta);
+                case 2 -> retirarDeCuenta(cuenta);
+                case 3 -> transferirDesdeCuenta(cuenta, cliente);
+                case 4 -> consultarSaldo(cuenta);
+                case 5 -> verHistorialTransacciones(cuenta);
+                case 6 -> cancelarUltimaTransaccion(cuenta);
+                case 7 -> actualizarSaldo(cuenta);
+                case 8 -> volver = true;
+                default -> System.out.println("Opción inválida.");
             }
         }
     }
 
-    // Método para depositar en una cuenta
+    // --- Métodos de apoyo para transacciones específicas ---
+
     private static void depositarEnCuenta(Cuenta cuenta) throws MontoInvalidoException {
-        System.out.print("Ingrese el monto a depositar: ");
-        double montoDeposito = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).depositar(montoDeposito);
-        } else if (cuenta instanceof CCorriente) {
-            ((CCorriente) cuenta).depositar(montoDeposito);
-            
+        System.out.print("Monto a depositar: ");
+        double monto = scanner.nextDouble();
+        scanner.nextLine();
+        if (cuenta instanceof OperacionesBancarias operacionesBancarias) {
+            operacionesBancarias.depositar(monto);
+            System.out.println("Depósito exitoso.");
         }
     }
 
-    // Método para retirar de una cuenta
     private static void retirarDeCuenta(Cuenta cuenta) throws SaldoInsuficienteException, MontoInvalidoException {
-        System.out.print("Ingrese el monto a retirar: ");
-        double montoRetiro = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).retirar(montoRetiro);
-        } else if (cuenta instanceof CCorriente) {
-            ((CCorriente) cuenta).retirar(montoRetiro);
-        }
-        System.out.println("Retiro realizado exitosamente.");
+        System.out.print("Monto a retirar: ");
+        double monto = scanner.nextDouble();
+        scanner.nextLine();
+        cuenta.retirar(monto);
+        System.out.println("Retiro exitoso.");
     }
 
-    // Método para transferir desde una cuenta
-    private static void transferirDesdeCuenta(Cuenta cuenta, Cliente cliente) throws SaldoInsuficienteException, MontoInvalidoException {
-        System.out.print("Ingrese el número de cuenta destino: ");
-        String numeroCuentaDestino = scanner.nextLine();
-        Cuenta cuentaDestino = cliente.buscarCuenta(numeroCuentaDestino);
+    private static void transferirDesdeCuenta(Cuenta cuenta, Cliente cliente)
+            throws SaldoInsuficienteException, MontoInvalidoException {
+        System.out.print("Número de cuenta destino: ");
+        String destino = scanner.nextLine();
+        Cuenta cuentaDestino = cliente.buscarCuenta(destino);
 
-        if (cuentaDestino == null) {
-            System.out.println("No se encontró la cuenta destino.");
-            return;
+        if (cuentaDestino != null && cuenta instanceof OperacionesBancarias) {
+            System.out.print("Monto a transferir: ");
+            double monto = scanner.nextDouble();
+            scanner.nextLine();
+            ((OperacionesBancarias) cuenta).transferir(monto, cuentaDestino);
+            System.out.println("Transferencia exitosa.");
+        } else {
+            System.out.println("Error en la transferencia.");
         }
-
-        System.out.print("Ingrese el monto a transferir: ");
-        double montoTransferencia = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
-
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).transferir(montoTransferencia, cuentaDestino);
-        } else if (cuenta instanceof CCorriente) {
-            ((CCorriente) cuenta).transferir(montoTransferencia, cuentaDestino);
-        }
-        System.out.println("Transferencia realizada exitosamente.");
     }
 
-    // Método para consultar el saldo de una cuenta
     private static void consultarSaldo(Cuenta cuenta) {
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).consultarSaldo();
-        } else if (cuenta instanceof CCorriente) {
-            ((CCorriente) cuenta).consultarSaldo();
-            
+        if (cuenta instanceof OperacionesBancarias operacionesBancarias) {
+            operacionesBancarias.consultarSaldo();
         }
     }
 
-    // Método para ver el historial de transacciones de una cuenta
     private static void verHistorialTransacciones(Cuenta cuenta) {
-        if (cuenta instanceof CuentaAhorro) {
-            List<Transaccion> historial = ((CuentaAhorro) cuenta).getHistorialTransacciones();
-            System.out.println("\n--- Historial de Transacciones ---");
-            for (Transaccion transaccion : historial) {
-                System.out.println(transaccion);
-            }
-        } else if (cuenta instanceof CCorriente) {
-            List<Transaccion> historial = ((CCorriente) cuenta).getHistorialTransacciones();
-            System.out.println("\n--- Historial de Transacciones ---");
-            for (Transaccion transaccion : historial) {
-                System.out.println(transaccion);
-            }
-        } else {
-            System.out.println("No se puede mostrar el historial para este tipo de cuenta.");
+        List<Transaccion> historial = null;
+        if (cuenta instanceof CuentaAhorro cuentaAhorro)
+            historial = cuentaAhorro.getHistorialTransacciones();
+        else if (cuenta instanceof CCorriente cuentaCorriente)
+            historial = cuentaCorriente.getHistorialTransacciones();
+
+        if (historial != null) {
+            System.out.println("\n--- Historial ---");
+            historial.forEach(System.out::println);
         }
     }
 
-    // Método para cancelar la última transacción de una cuenta
     private static void cancelarUltimaTransaccion(Cuenta cuenta) {
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).cancelarTransaccion();
-            System.out.println("Última transacción cancelada exitosamente.");
-        } else if (cuenta instanceof CCorriente) {
-            ((CCorriente) cuenta).cancelarTransaccion();
-            System.out.println("Última transacción cancelada exitosamente.");
-        } else {
-            System.out.println("No se puede cancelar la última transacción para este tipo de cuenta.");
+        if (cuenta instanceof OperacionesBancarias operacionesBancarias) {
+            operacionesBancarias.cancelarTransaccion();
+            System.out.println("Operación revertida.");
         }
     }
 
-    // Método para actualizar el saldo de una cuenta de ahorro
     private static void actualizarSaldo(Cuenta cuenta) {
-        if (cuenta instanceof CuentaAhorro) {
-            ((CuentaAhorro) cuenta).actualizarSaldo();
-            System.out.println("Saldo actualizado exitosamente.");
-        } else {
-            System.out.println("Esta operación solo está disponible para cuentas de ahorro.");
-        }
+        cuenta.actualizarSaldo();
+        System.out.println("Intereses aplicados.");
+    }
+
+    private static void crearCuentaAhorro(Cliente cliente) {
+        System.out.print("Saldo inicial: ");
+        double s = scanner.nextDouble();
+        System.out.print("Interés: ");
+        double i = scanner.nextDouble();
+        System.out.print("Mínimo: ");
+        double m = scanner.nextDouble();
+        cliente.agregarCuenta(new CuentaAhorro(s, cliente, i, m));
+        System.out.println("Cuenta de Ahorro creada.");
+    }
+
+    private static void crearCCorriente(Cliente cliente) {
+        System.out.print("Saldo inicial: ");
+        double s = scanner.nextDouble();
+        cliente.agregarCuenta(new CCorriente(s, cliente));
+        System.out.println("Cuenta Corriente creada.");
+    }
+
+    private static void verCuentas(Cliente cliente) {
+        cliente.getCuentas()
+                .forEach(c -> System.out.println("Nº: " + c.getNumeroCuenta() + " | Saldo: " + c.getSaldo()));
     }
 }

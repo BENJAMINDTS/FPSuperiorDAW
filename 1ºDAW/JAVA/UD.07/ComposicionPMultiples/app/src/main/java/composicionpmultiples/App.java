@@ -5,20 +5,54 @@ package composicionpmultiples;
 
 import java.util.ArrayList;
 
+/**
+ * Punto de entrada principal para la aplicación de gestión de bibliotecas.
+ * Esta clase orquestra la creación de la infraestructura de la biblioteca,
+ * la generación de ejemplares de libros y la ejecución de las operaciones de
+ * inventario.
+ * * @author BenjaminDTS
+ * 
+ * @version 1.0
+ */
 public class App {
 
+    /**
+     * Método principal que ejecuta la lógica de demostración del sistema.
+     * Realiza las siguientes acciones:
+     * 1. Inicializa una nueva Biblioteca con una lista vacía.
+     * 2. Crea múltiples instancias de la clase Libros con datos históricos y
+     * literarios.
+     * 3. Registra los libros en el sistema mediante métodos estáticos.
+     * 4. Despliega el catálogo final por consola.
+     * * @param args Argumentos de la línea de comandos (no utilizados en esta
+     * implementación).
+     */
     public static void main(String[] args) {
-        Biblioteca biblioteca = new Biblioteca("Biblioteca Nacional", new ArrayList<Libros>());
-        Libros libro1 = new Libros("El Quijote", "Miguel de Cervantes", 1605, "Francisco de Robles", "Cervantes, M. (1605). El Quijote. Francisco de Robles.");
-        Libros libro2 = new Libros("La Odisea", "Homero", 800, "Desconocida", "Homero. (800). La Odisea. Desconocida.");   
+        // Inicialización del contenedor principal (Biblioteca)
+        Biblioteca biblioteca = new Biblioteca("Biblioteca Nacional", new ArrayList<>());
+
+        // Instanciación de diversos objetos Libros con sus metadatos completos
+        Libros libro1 = new Libros("El Quijote", "Miguel de Cervantes", 1605, "Francisco de Robles",
+                "Cervantes, M. (1605). El Quijote. Francisco de Robles.");
+        Libros libro2 = new Libros("La Odisea", "Homero", 800, "Desconocida", "Homero. (800). La Odisea. Desconocida.");
         Libros libro3 = new Libros("La Iliada", "Homero", 800, "Desconocida", "Homero. (800). La Iliada. Desconocida.");
-        Libros libro4 = new Libros("El Aleph", "Jorge Luis Borges", 1949, "Sur", "Borges, J. L. (1949). El Aleph. Sur.");
-        Libros libro5 = new Libros("Cien años de soledad", "Gabriel García Márquez", 1967, "Sudamericana", "García Márquez, G. (1967). Cien años de soledad. Sudamericana.");
+        Libros libro4 = new Libros("El Aleph", "Jorge Luis Borges", 1949, "Sur",
+                "Borges, J. L. (1949). El Aleph. Sur.");
+        Libros libro5 = new Libros("Cien años de soledad", "Gabriel García Márquez", 1967, "Sudamericana",
+                "García Márquez, G. (1967). Cien años de soledad. Sudamericana.");
+
+        /**
+         * Adición de libros a la colección de la biblioteca.
+         * Se utiliza el acceso directo a la lista interna a través del getter de la
+         * instancia.
+         */
         Biblioteca.añadirLibro(biblioteca.getLibros(), libro1);
         Biblioteca.añadirLibro(biblioteca.getLibros(), libro2);
         Biblioteca.añadirLibro(biblioteca.getLibros(), libro3);
         Biblioteca.añadirLibro(biblioteca.getLibros(), libro4);
         Biblioteca.añadirLibro(biblioteca.getLibros(), libro5);
+
+        // Invocación del proceso de listado para verificar la carga de datos
         Biblioteca.listarLibros(biblioteca.getLibros());
     }
 }

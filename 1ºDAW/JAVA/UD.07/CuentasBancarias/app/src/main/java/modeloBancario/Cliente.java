@@ -2,33 +2,69 @@ package modeloBancario;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Representa al usuario titular del sistema bancario.
+ * Gestiona la información personal, la seguridad mediante contraseñas robustas
+ * y el catálogo de cuentas asociadas al individuo.
+ * * @author BenjaminDTS
+ * 
+ * @version 1.0
+ */
 public class Cliente {
-    // Declaración de variables
-    private String dni; // DNI del cliente
-    private String contrasena; // Contraseña del cliente
+
+    /** Documento Nacional de Identidad del cliente */
+    private String dni;
+
+    /** Clave de acceso al sistema (almacenada en texto plano para este modelo) */
+    private String contrasena;
+
+    /** Nombre completo del titular */
     private String nombre;
+
+    /** Domicilio de residencia del cliente */
     private String direccion;
+
+    /** Número de contacto telefónico */
     private String telefono;
-    private List<Cuenta> cuentas; // Lista de cuentas del cliente
 
-    // Expresión regular para validar la contraseña
-    private static final String CONTRASENA_PATTERN =
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+    /**
+     * Relación de agregación: Lista de productos financieros (cuentas) del cliente
+     */
+    private List<Cuenta> cuentas;
 
-    // Constructor con parámetros
+    /**
+     * * Patrón Regex para validación de contraseña:
+     * - Al menos una minúscula, una mayúscula, un número y un carácter especial.
+     * - Longitud mínima de 8 caracteres.
+     */
+    private static final String CONTRASENA_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+    /**
+     * Constructor con parámetros. Inicializa al cliente y valida su política de
+     * seguridad.
+     * * @param dni Identificador legal.
+     * 
+     * @param contrasena Clave que debe cumplir con los requisitos del patrón.
+     * @param nombre     Nombre del titular.
+     * @param direccion  Domicilio fiscal.
+     * @param telefono   Teléfono de contacto.
+     */
     public Cliente(String dni, String contrasena, String nombre, String direccion, String telefono) {
         this.dni = dni;
-        setContrasena(contrasena); // Validar y establecer la contraseña
+        setContrasena(contrasena); // Invocación al setter para aplicar validación Regex
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.cuentas = new ArrayList<>();
     }
 
-    // Constructor sin parámetros
+    /**
+     * Constructor por defecto. Crea una instancia con campos vacíos e inicializa la
+     * lista de cuentas.
+     */
     public Cliente() {
         this.dni = "";
         this.contrasena = "";
@@ -38,7 +74,8 @@ public class Cliente {
         this.cuentas = new ArrayList<>();
     }
 
-    // Métodos get y set
+    // --- Métodos de Acceso (Getters y Setters) ---
+
     public String getDni() {
         return dni;
     }
@@ -51,6 +88,13 @@ public class Cliente {
         return contrasena;
     }
 
+    /**
+     * Establece la contraseña del cliente tras validar su robustez.
+     * * @param contrasena Nueva clave a evaluar.
+     * 
+     * @throws IllegalArgumentException Si la clave no cumple con el patrón de
+     *                                  seguridad.
+     */
     public void setContrasena(String contrasena) {
         if (validarContrasena(contrasena)) {
             this.contrasena = contrasena;
@@ -59,7 +103,12 @@ public class Cliente {
         }
     }
 
-    // Método para validar la contraseña
+    /**
+     * Motor de validación interna mediante expresiones regulares.
+     * * @param contrasena Cadena a evaluar.
+     * 
+     * @return true si cumple los requisitos, false en caso contrario.
+     */
     private boolean validarContrasena(String contrasena) {
         Pattern pattern = Pattern.compile(CONTRASENA_PATTERN);
         Matcher matcher = pattern.matcher(contrasena);
@@ -90,16 +139,32 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    // Métodos para gestionar cuentas
+    // --- Gestión de la Colección de Cuentas ---
+
+    /**
+     * Vincula una nueva cuenta bancaria al catálogo del cliente.
+     * * @param cuenta Objeto de tipo Cuenta (Ahorro, Corriente, etc.).
+     */
     public void agregarCuenta(Cuenta cuenta) {
-        cuentas.add(cuenta);
+        if (cuenta != null) {
+            cuentas.add(cuenta);
+        }
     }
 
+    /**
+     * Recupera el listado de todas las cuentas pertenecientes al titular.
+     * * @return List de objetos Cuenta.
+     */
     public List<Cuenta> getCuentas() {
         return cuentas;
     }
 
-    // Método para buscar una cuenta por su número
+    /**
+     * Realiza una búsqueda lineal dentro de las cuentas del cliente.
+     * * @param numeroCuenta El IBAN o identificador a buscar.
+     * 
+     * @return El objeto Cuenta coincidente o null si no se encuentra.
+     */
     public Cuenta buscarCuenta(String numeroCuenta) {
         for (Cuenta cuenta : cuentas) {
             if (cuenta.getNumeroCuenta().equals(numeroCuenta)) {
