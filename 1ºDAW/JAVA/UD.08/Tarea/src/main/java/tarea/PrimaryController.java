@@ -1,5 +1,10 @@
 package tarea;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -8,11 +13,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tarea.Producto.Categoria;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * Controlador principal de la interfaz de usuario JavaFX. Intermedia entre los
+ * eventos visuales generados por el usuario y la capa de acceso a datos (DAO).
+ *
+ * * @author BenjaminDTS
+ * @version 1.0
+ */
 public class PrimaryController {
 
     @FXML
@@ -28,66 +35,70 @@ public class PrimaryController {
     @FXML
     private TextArea TALista;
     @FXML
-    private Button BBuscar;
-    @FXML
-    private Button BMostrar;
-    @FXML
-    private Button BInsertar;
-    @FXML
-    private Button BBorrar;
-    @FXML
-    private Button BSalir;
-    @FXML
-    private Button BExportar;
-    @FXML
-    private Button BModificar;
+    private Button BBuscar, BMostrar, BInsertar, BBorrar, BSalir, BExportar, BModificar;
     @FXML
     private ChoiceBox<Categoria> choiceBoxCategoria;
 
+    /**
+     * Objeto DAO encargado de la persistencia
+     */
     DAO dao = new DAO();
+
+    /**
+     * Producto actualmente seleccionado o gestionado en memoria
+     */
     private Producto producto;
+
+    /**
+     * Lista caché de productos para mostrar en la interfaz
+     */
     private List<Producto> productos = new ArrayList<>();
-    
+
+    /**
+     * Formateador para mostrar el precio monetario de forma consistente
+     */
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
+    /**
+     * Método de inicialización automática llamado por JavaFX tras cargar el
+     * FXML. Configura el selector de categorías y establece listeners reactivos
+     * en los campos de texto.
+     */
+    @FXML
     public void initialize() {
-        
-
-        // Cargar categorías en el ChoiceBox desde el enum
         choiceBoxCategoria.getItems().setAll(Categoria.values());
-
-        
         InsertarOpacity();
 
-
-        TFCodigo.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            InsertarOpacity();
-        });
-
+        TFCodigo.textProperty().addListener((observable, oldValue, newValue) -> InsertarOpacity());
         TFNombre.textProperty().addListener((observable, oldValue, newValue) -> InsertarOpacity());
         TFPrecio.textProperty().addListener((observable, oldValue, newValue) -> InsertarOpacity());
         TFCantidad.textProperty().addListener((observable, oldValue, newValue) -> InsertarOpacity());
         TFDescripcion.textProperty().addListener((observable, oldValue, newValue) -> InsertarOpacity());
     }
 
+    /**
+     * Formatea y vuelca una lista de productos en el componente visual
+     * TextArea.
+     *
+     * * @param productos Lista de productos a visualizar.
+     */
     private void actualizarListaProductos(List<Producto> productos) {
         StringBuilder sb = new StringBuilder();
-        for (Producto producto : productos) {
-            sb.append("Código: ").append(producto.getCodigo()).append("\n");
-            sb.append("Nombre: ").append(producto.getNombre()).append("\n");
-            sb.append("Cantidad: ").append(producto.getCantidad()).append("\n");
-            sb.append("Precio: ").append(decimalFormat.format(producto.getPrecio())).append("\n");
-            sb.append("Descripción: ").append(producto.getDescripcion()).append("\n");
-            sb.append("Categoría: ").append(producto.getCategoria().name()).append("\n\n");
+        for (Producto prod : productos) {
+            sb.append("Código: ").append(prod.getCodigo()).append("\n");
+            sb.append("Nombre: ").append(prod.getNombre()).append("\n");
+            sb.append("Cantidad: ").append(prod.getCantidad()).append("\n");
+            sb.append("Precio: ").append(decimalFormat.format(prod.getPrecio())).append("\n");
+            sb.append("Descripción: ").append(prod.getDescripcion()).append("\n");
+            sb.append("Categoría: ").append(prod.getCategoria().name()).append("\n\n");
         }
         TALista.setText(sb.toString());
     }
 
-
-    
-
-
+    /**
+     * Habilita o deshabilita el botón de insertar y ajusta su opacidad
+     * dependiendo de si los campos obligatorios del formulario están vacíos.
+     */
     @FXML
     private void InsertarOpacity() {
         boolean isEmpty = TFCodigo.getText().trim().isEmpty() || TFNombre.getText().trim().isEmpty()
@@ -97,142 +108,131 @@ public class PrimaryController {
         BInsertar.setOpacity(isEmpty ? 0.5 : 1.0);
     }
 
-
+    /**
+     * Cierra completamente la aplicación de manera segura.
+     */
     @FXML
     private void handleSalir() {
         System.exit(0);
     }
 
+    /**
+     * Captura los datos del formulario, valida el formato y persiste un nuevo
+     * producto. Gestiona notificaciones visuales mediante alertas en caso de
+     * error.
+     */
     @FXML
     private void handleInsertar() {
         try {
             String codigoTexto = TFCodigo.getText().trim();
             if (!codigoTexto.matches("[A-Z]{2,3}\\d+")) {
-                mostrarAlerta("Código Inválido", "Formato de Código Incorrecto", "El código debe tener dos o tres letras mayúsculas seguido de un número entero.", Alert.AlertType.ERROR);
+                mostrarAlerta("Código Inválido", "Formato Incorrecto", "Debe tener 2 o 3 letras mayúsculas seguidas de un número.", Alert.AlertType.ERROR);
                 return;
             }
 
-            String codigo = TFCodigo.getText().trim();
-            String nombre = TFNombre.getText().trim();
-            int cantidad = Integer.parseInt(TFCantidad.getText().trim());
-            double precio = Double.parseDouble(TFPrecio.getText().trim());
-            String descripcion = TFDescripcion.getText().trim();
             Categoria categoria = choiceBoxCategoria.getValue();
-
             if (categoria == null) {
-                mostrarAlerta("Categoría No Seleccionada", "Selecciona una Categoría", "Por favor, selecciona una categoría para el producto.", Alert.AlertType.ERROR);
+                mostrarAlerta("Categoría requerida", "Selecciona una Categoría", "Seleccione una categoría válida.", Alert.AlertType.ERROR);
                 return;
             }
 
-            Producto producto = new Producto(codigo, nombre, cantidad, precio, descripcion, categoria);
-            
-            dao.save(producto); // Guardar el producto en la base de datos
+            Producto nuevoProducto = new Producto(
+                    codigoTexto, TFNombre.getText().trim(),
+                    Integer.parseInt(TFCantidad.getText().trim()),
+                    Double.parseDouble(TFPrecio.getText().trim()),
+                    TFDescripcion.getText().trim(), categoria);
 
-            TFCodigo.clear();
-            TFNombre.clear();
-            TFCantidad.clear();
-            TFPrecio.clear();
-            TFDescripcion.clear();
-            choiceBoxCategoria.setValue(null);
-
-            System.out.println("Producto insertado: " + producto.getNombre());
-            imprimirProducto(producto);
-
+            dao.save(nuevoProducto);
+            limpiarCampos();
+            System.out.println("Producto insertado: " + nuevoProducto.getNombre());
 
         } catch (NumberFormatException e) {
-            mostrarAlerta("Error de Formato", "Datos Inválidos", "Por favor, ingresa valores numéricos válidos para código, cantidad y precio.", Alert.AlertType.ERROR);
+            mostrarAlerta("Error numérico", "Datos Inválidos", "Revise cantidad y precio.", Alert.AlertType.ERROR);
         }
     }
 
+    /**
+     * Obtiene y muestra todos los productos almacenados en la base de datos.
+     */
     @FXML
     private void handleMostrar() {
-        // Limpiar el TextArea antes de mostrar los productos
         TALista.clear();
-        dao.mostrarProductos().forEach(producto-> TALista.appendText(producto.toString()+ "\n"));
-
+        dao.mostrarProductos().forEach(p -> TALista.appendText(p.toString() + "\n"));
     }
 
-   
-
+    /**
+     * Busca un producto por código y rellena el formulario con sus datos si
+     * existe.
+     */
     @FXML
     private void handleBuscar() {
-        String codigoTexto = TFCodigo.getText().trim(); 
+        String codigoTexto = TFCodigo.getText().trim();
         if (codigoTexto.isEmpty()) {
-            mostrarAlerta("Código Vacío", "Por favor, ingresa un código para buscar.", "El campo de código no puede estar vacío.", Alert.AlertType.WARNING);
+            mostrarAlerta("Código Vacío", "Ingrese un código", "No puede estar vacío.", Alert.AlertType.WARNING);
+            return;
+        }
+        producto = dao.findById(codigoTexto);
+        if (producto != null) {
+            TFNombre.setText(producto.getNombre());
+            TFCantidad.setText(String.valueOf(producto.getCantidad()));
+            TFPrecio.setText(String.valueOf(producto.getPrecio()));
+            TFDescripcion.setText(producto.getDescripcion());
+            choiceBoxCategoria.setValue(producto.getCategoria());
         } else {
-            try {
-                producto=dao.findById(codigoTexto);
-                if (producto != null) {
-                    TFNombre.setText(producto.getNombre());
-                    TFCantidad.setText(String.valueOf(producto.getCantidad()));
-                    TFPrecio.setText(String.valueOf(producto.getPrecio()));
-                    TFDescripcion.setText(producto.getDescripcion());
-                    choiceBoxCategoria.setValue(producto.getCategoria());
-                } else {
-                    mostrarAlerta("Producto No Encontrado", "No se encontró ningún producto con el código especificado.", "Por favor, verifica el código e inténtalo de nuevo.", Alert.AlertType.WARNING);
-                }
-            } catch (NumberFormatException e) {
-                mostrarAlerta("Error de Formato", "Código Inválido", "Por favor, ingresa un código numérico válido.", Alert.AlertType.ERROR);
-            }
-            
+            mostrarAlerta("No encontrado", "Búsqueda fallida", "Verifica el código.", Alert.AlertType.WARNING);
         }
     }
 
-
-
+    /**
+     * Elimina el producto asociado al código ingresado en el formulario.
+     */
     @FXML
     private void handleBorrar() {
-        try {
-            String codigo = TFCodigo.getText().trim();
-
-            dao.delete(codigo); // Eliminar el producto de la base de datos
-            productos = dao.mostrarProductos(); // Actualizar la lista de productos desde la base de datos
-            actualizarListaProductos(productos);
-            TFCodigo.clear();
-            TFNombre.clear();
-            TFCantidad.clear();
-            TFPrecio.clear();
-            TFDescripcion.clear();
-            choiceBoxCategoria.setValue(null);
-            mostrarAlerta("Producto Eliminado", "Producto Eliminado Correctamente", "El producto ha sido eliminado correctamente.", Alert.AlertType.INFORMATION);
-        } catch (NumberFormatException e) {
-            mostrarAlerta("Error de Formato", "Código Inválido", "Por favor, ingresa un código numérico válido para borrar un producto.", Alert.AlertType.ERROR);
-        }
+        String codigo = TFCodigo.getText().trim();
+        dao.delete(codigo);
+        productos = dao.mostrarProductos();
+        actualizarListaProductos(productos);
+        limpiarCampos();
+        mostrarAlerta("Eliminado", "Correcto", "El producto ha sido eliminado.", Alert.AlertType.INFORMATION);
     }
 
+    /**
+     * Modifica el producto actualmente cargado en el formulario con los nuevos
+     * valores ingresados.
+     */
     @FXML
     private void handleModificar() {
+        Categoria categoria = choiceBoxCategoria.getValue();
+        if (categoria == null) {
+            mostrarAlerta("Categoría", "Selecciona Categoría", "Requerido.", Alert.AlertType.ERROR);
+            return;
+        }
+        Producto pMod = new Producto(
+                producto.getCodigo(), TFNombre.getText().trim(),
+                Integer.parseInt(TFCantidad.getText().trim()),
+                Double.parseDouble(TFPrecio.getText().trim()),
+                TFDescripcion.getText().trim(), categoria);
 
-            String nombre = TFNombre.getText().trim();
-            int cantidad = Integer.parseInt(TFCantidad.getText().trim());
-            double precio = Double.parseDouble(TFPrecio.getText().trim());
-            String descripcion = TFDescripcion.getText().trim();
-            Categoria categoria = choiceBoxCategoria.getValue();
-
-            if (categoria == null) {
-                mostrarAlerta("Categoría No Seleccionada", "Selecciona una Categoría", "Por favor, selecciona una categoría para el producto.", Alert.AlertType.ERROR);
-                return;
-            }
-
-            Producto productoAModificar = new Producto(producto.getCodigo(), nombre, cantidad, precio, descripcion, categoria);
-
-            dao.update(productoAModificar); // Actualizar el producto en la base de datos
-
-            System.out.println("Producto modificado: " + productoAModificar.getNombre());
-            imprimirProducto(productoAModificar);
-            actualizarListaProductos(productos);
-        
+        dao.update(pMod);
+        actualizarListaProductos(dao.mostrarProductos());
     }
 
-    private void imprimirProducto(Producto producto) {
-        System.out.println("Código: " + producto.getCodigo());
-        System.out.println("Nombre: " + producto.getNombre());
-        System.out.println("Cantidad: " + producto.getCantidad());
-        System.out.println("Precio: " + decimalFormat.format(producto.getPrecio()));
-        System.out.println("Descripción: " + producto.getDescripcion());
-        System.out.println("Categoría: " + producto.getCategoria().name());
+    /**
+     * Limpia visualmente todos los controles del formulario
+     */
+    private void limpiarCampos() {
+        TFCodigo.clear();
+        TFNombre.clear();
+        TFCantidad.clear();
+        TFPrecio.clear();
+        TFDescripcion.clear();
+        choiceBoxCategoria.setValue(null);
     }
 
+    /**
+     * Centraliza la creación y muestra de cuadros de diálogo emergentes
+     * (Alerts).
+     */
     private void mostrarAlerta(String titulo, String encabezado, String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
@@ -241,7 +241,7 @@ public class PrimaryController {
         alert.showAndWait();
     }
 
-    // Métodos para manejar eventos de categorías
+    // Handlers para filtrar por categoría
     @FXML
     private void handleMostrarCategoriaElectronica() {
         mostrarProductosPorCategoria(Categoria.ELECTRONICA);
@@ -262,21 +262,21 @@ public class PrimaryController {
         mostrarProductosPorCategoria(Categoria.HOGAR);
     }
 
-    // Método auxiliar para mostrar productos de una categoría específica
+    /**
+     * Filtra la lista en memoria y muestra únicamente los productos que
+     * pertenezcan a la categoría dada.
+     *
+     * * @param categoria La enumeración Categoria utilizada como filtro.
+     */
     private void mostrarProductosPorCategoria(Categoria categoria) {
-        List<Producto> productosFiltrados = productos.stream()
-                .filter(producto -> producto.getCategoria() == categoria)
+        List<Producto> filtrados = dao.mostrarProductos().stream()
+                .filter(p -> p.getCategoria() == categoria)
                 .collect(Collectors.toList());
 
-        if (productosFiltrados.isEmpty()) {
-            mostrarAlerta("Categoría Vacía", "No hay productos en la categoría " + categoria.name(),
-                    "No se encontraron productos en esta categoría.", Alert.AlertType.INFORMATION);
+        if (filtrados.isEmpty()) {
+            mostrarAlerta("Vacío", "Sin productos", "No hay elementos en " + categoria.name(), Alert.AlertType.INFORMATION);
         } else {
-            actualizarListaProductos(productosFiltrados);
+            actualizarListaProductos(filtrados);
         }
     }
-
-    // Método para guardar la lista de productos en un archivo XML
-    
-    
 }
