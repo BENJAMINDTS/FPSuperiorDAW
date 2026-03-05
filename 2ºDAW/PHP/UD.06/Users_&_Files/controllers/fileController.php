@@ -1,14 +1,38 @@
 <?php
 require_once 'models/fileModel.php';
 
+/**
+ * Clase FileController
+ *
+ * Controlador encargado de gestionar la carga, visualización y eliminación 
+ * de archivos por parte de los usuarios del sistema.
+ *
+ * @package Controllers
+ * @author BenjaminDTS
+ */
 class FileController
 {
+  /**
+   * Inicializa la conexión a la base de datos y el modelo de archivos.
+   *
+   * @return fileModel Instancia del modelo de archivos con la conexión inyectada.
+   */
   private function conectar()
   {
     require 'config/database.php';
+    // Se asume que $connection es provista por 'config/database.php'
     return new fileModel($connection);
   }
 
+  /**
+   * Procesa la subida de un archivo al servidor.
+   *
+   * Verifica la sesión del usuario, maneja los posibles errores de subida,
+   * mueve el archivo físico a un directorio seguro y registra los datos en la base de datos.
+   * Finalmente, carga la vista correspondiente.
+   *
+   * @return void
+   */
   public function subirArchivo()
   {
     $mensaje = "";
@@ -54,6 +78,13 @@ class FileController
     require_once 'views/files/upload.php';
   }
 
+  /**
+   * Obtiene y muestra la lista de archivos pertenecientes al usuario actual.
+   *
+   * Requiere que el usuario tenga una sesión activa. Carga la vista de listado.
+   *
+   * @return void
+   */
   public function verArchivos()
   {
     $usuario_id = $_SESSION['usuario']['id'] ?? null;
@@ -68,6 +99,14 @@ class FileController
     require_once 'views/files/list.php';
   }
 
+  /**
+   * Elimina un archivo específico del servidor y de la base de datos.
+   *
+   * Verifica por seguridad que el archivo a eliminar pertenezca al usuario 
+   * que realiza la petición. Tras la operación, redirige al listado.
+   *
+   * @return void
+   */
   public function eliminarArchivo()
   {
     $archivo_id = $_GET['id'] ?? null;
@@ -89,6 +128,12 @@ class FileController
     exit();
   }
 
+  /**
+   * Traduce los códigos de error de subida de PHP a mensajes legibles.
+   *
+   * @param int $codigoError El código de error devuelto por $_FILES['archivo']['error'].
+   * @return string El mensaje de error descriptivo.
+   */
   private function obtenerMensajeErrorSubida($codigoError)
   {
     switch ($codigoError) {

@@ -1,16 +1,37 @@
 <?php
 require_once 'models/userModel.php';
 
+/**
+ * Clase UsuarioController
+ *
+ * Controlador encargado de gestionar el flujo completo de los usuarios,
+ * incluyendo registro, autenticación (login), listado con paginación, 
+ * edición y eliminación de registros.
+ *
+ * @package Controllers
+ * @author BenjaminDTS
+ */
 class UsuarioController
 {
-
+  /**
+   * Inicializa la conexión a la base de datos y el modelo de usuarios.
+   *
+   * @return userModel Instancia del modelo de usuarios con la conexión inyectada.
+   */
   private function conectar()
   {
     require 'config/database.php'; // Esto genera $connection
     return new userModel($connection);
   }
 
-  // REGISTRO
+  /**
+   * Carga la vista de registro y procesa el formulario de creación de usuarios.
+   *
+   * Si la petición es POST y los campos requeridos no están vacíos, 
+   * intenta registrar al nuevo usuario en la base de datos.
+   *
+   * @return void
+   */
   public function index()
   {
     $mensaje = "";
@@ -28,7 +49,11 @@ class UsuarioController
     require_once 'views/user/register.php';
   }
 
-  // LISTAR + BUSCAR
+  /**
+   * Lista los usuarios registrados, aplicando filtros de búsqueda y paginación.
+   *
+   * @return void
+   */
   public function listar()
   {
     $usuarioModel = $this->conectar();
@@ -45,7 +70,13 @@ class UsuarioController
     require_once 'views/user/list.php';
   }
 
-  // ELIMINAR
+  /**
+   * Elimina un usuario del sistema utilizando su identificador.
+   *
+   * Tras procesar la eliminación, redirige al listado de usuarios.
+   *
+   * @return void
+   */
   public function eliminar()
   {
     $id = $_GET['id'] ?? null;
@@ -55,9 +86,17 @@ class UsuarioController
     }
     // Redirigir a la lista
     header("Location: index.php?accion=listar");
+    exit(); // Es buena práctica añadir exit() después de un header de redirección
   }
 
-  // EDITAR (Mostrar formulario)
+  /**
+   * Muestra el formulario de edición para un usuario específico.
+   *
+   * Obtiene los datos del usuario por su ID y carga la vista correspondiente.
+   * Si no se proporciona un ID, redirige al listado.
+   *
+   * @return void
+   */
   public function editar()
   {
     $id = $_GET['id'] ?? null;
@@ -67,10 +106,18 @@ class UsuarioController
       require_once 'views/user/edit.php';
     } else {
       header("Location: index.php?accion=listar");
+      exit();
     }
   }
 
-  // ACTUALIZAR (Procesar formulario de edición)
+  /**
+   * Procesa la actualización de los datos de un usuario.
+   *
+   * Recibe los datos del formulario de edición vía POST y los envía al modelo.
+   * Posteriormente redirige al listado de usuarios.
+   *
+   * @return void
+   */
   public function actualizar()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -82,8 +129,17 @@ class UsuarioController
       $model->actualizar($id, $nombre, $nuevoEmail);
     }
     header("Location: index.php?accion=listar");
+    exit();
   }
 
+  /**
+   * Gestiona el inicio de sesión de los usuarios.
+   *
+   * Valida las credenciales contra la base de datos. Si son correctas, 
+   * inicializa la sesión y redirige al listado. Si fallan, muestra un error.
+   *
+   * @return void
+   */
   public function login()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

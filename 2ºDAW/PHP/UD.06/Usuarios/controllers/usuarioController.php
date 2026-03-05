@@ -1,22 +1,38 @@
 <?php
 require_once 'models/Usuario.php';
 
+/**
+ * Clase UsuarioController
+ *
+ * Controlador encargado de gestionar las operaciones CRUD de los usuarios,
+ * utilizando el correo electrónico como identificador principal.
+ *
+ * @package Controllers
+ * @author BenjaminDTS
+ */
 class UsuarioController
 {
-
+  /**
+   * Inicializa la conexión a la base de datos y el modelo de usuario.
+   *
+   * @return Usuario Instancia del modelo Usuario con la conexión inyectada.
+   */
   private function conectar()
   {
     require 'config/database.php'; // Esto genera $connection
     return new Usuario($connection);
   }
 
-  // REGISTRO
+  /**
+   * Carga la vista principal y procesa el registro de un nuevo usuario.
+   *
+   * Si la petición es POST, valida los campos recibidos e intenta crear
+   * el registro en la base de datos a través del modelo.
+   *
+   * @return void
+   */
   public function index()
   {
-    // ... (Tu código de registro anterior) ...
-    // Simplemente copialo o mantenlo como estaba.
-    // Para ahorrar espacio aquí me centro en lo nuevo:
-
     $mensaje = "";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // ... lógica de registro ...
@@ -25,14 +41,23 @@ class UsuarioController
       $password = $_POST['password'] ?? '';
       if (!empty($nombre) && !empty($email) && !empty($password)) {
         $model = $this->conectar();
-        if ($model->registrar($nombre, $email, $password)) $mensaje = "Registrado OK";
-        else $mensaje = "Error al registrar";
+        if ($model->registrar($nombre, $email, $password)) {
+          $mensaje = "Registrado OK";
+        } else {
+          $mensaje = "Error al registrar";
+        }
       }
     }
     require_once 'views/registro.php';
   }
 
-  // LISTAR + BUSCAR
+  /**
+   * Obtiene la lista de usuarios y procesa búsquedas si se envían por POST.
+   *
+   * Carga la vista con el listado de usuarios obtenidos del modelo.
+   *
+   * @return void
+   */
   public function listar()
   {
     $usuarioModel = $this->conectar();
@@ -44,7 +69,14 @@ class UsuarioController
     require_once 'views/lista_usuarios.php';
   }
 
-  // ELIMINAR
+  /**
+   * Elimina un usuario de la base de datos utilizando su correo electrónico.
+   *
+   * Obtiene el email mediante GET y, tras realizar la eliminación, 
+   * redirige de vuelta a la lista de usuarios.
+   *
+   * @return void
+   */
   public function eliminar()
   {
     $email = $_GET['email'] ?? null;
@@ -54,9 +86,17 @@ class UsuarioController
     }
     // Redirigir a la lista
     header("Location: index.php?accion=listar");
+    exit(); // Añadido por seguridad tras la redirección
   }
 
-  // EDITAR (Mostrar formulario)
+  /**
+   * Muestra el formulario de edición de un usuario específico.
+   *
+   * Obtiene los datos del usuario basándose en el email proporcionado por GET.
+   * Si no se proporciona un email válido, redirige al listado.
+   *
+   * @return void
+   */
   public function editar()
   {
     $email = $_GET['email'] ?? null;
@@ -66,10 +106,19 @@ class UsuarioController
       require_once 'views/editar.php';
     } else {
       header("Location: index.php?accion=listar");
+      exit(); // Añadido por seguridad tras la redirección
     }
   }
 
-  // ACTUALIZAR (Procesar formulario de edición)
+  /**
+   * Procesa la actualización de los datos de un usuario desde el formulario.
+   *
+   * Utiliza un campo oculto (email_original) para localizar el registro,
+   * permitiendo así la actualización del propio correo electrónico.
+   * Tras procesar los datos, redirige al listado.
+   *
+   * @return void
+   */
   public function actualizar()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -81,5 +130,6 @@ class UsuarioController
       $model->actualizar($emailOriginal, $nombre, $nuevoEmail);
     }
     header("Location: index.php?accion=listar");
+    exit(); // Añadido por seguridad tras la redirección
   }
 }

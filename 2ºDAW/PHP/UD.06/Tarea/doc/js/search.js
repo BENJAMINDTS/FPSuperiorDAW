@@ -1,33 +1,20 @@
-// Search module for phpDocumentor
-//
-// This module is a wrapper around fuse.js that will use a given index and attach itself to a
-// search form and to a search results pane identified by the following data attributes:
-//
-// 1. data-search-form
-// 2. data-search-results
-//
-// The data-search-form is expected to have a single input element of type 'search' that will trigger searching for
-// a series of results, were the data-search-results pane is expected to have a direct UL child that will be populated
-// with rendered results.
-//
-// The search has various stages, upon loading this stage the data-search-form receives the CSS class
-// 'phpdocumentor-search--enabled'; this indicates that JS is allowed and indices are being loaded. It is recommended
-// to hide the form by default and show it when it receives this class to achieve progressive enhancement for this
-// feature.
-//
-// After loading this module, it is expected to load a search index asynchronously, for example:
-//
-//         <script defer src="js/searchIndex.js"></script>
-//
-// In this script the generated index should attach itself to the search module using the `appendIndex` function. By
-// doing it like this the page will continue loading, unhindered by the loading of the search.
-//
-// After the page has fully loaded, and all these deferred indexes loaded, the initialization of the search module will
-// be called and the form will receive the class 'phpdocumentor-search--active', indicating search is ready. At this
-// point, the input field will also have it's 'disabled' attribute removed.
+/**
+ * @fileoverview Módulo de búsqueda para phpDocumentor.
+ * Este módulo es un envoltorio (wrapper) alrededor de fuse.js que utiliza un índice dado
+ * y se adjunta a un formulario de búsqueda y a un panel de resultados.
+ * @author BenjaminDTS
+ */
+
 var Search = (function () {
+    /** @type {Object} Instancia de Fuse.js */
     var fuse;
+
+    /** @type {Array<Object>} Arreglo que contiene el índice de búsqueda */
     var index = [];
+
+    /** * @type {Object} 
+     * @description Opciones de configuración para Fuse.js
+     */
     var options = {
         shouldSort: true,
         threshold: 0.6,
@@ -43,11 +30,16 @@ var Search = (function () {
         ]
     };
 
-    // Credit David Walsh (https://davidwalsh.name/javascript-debounce-function)
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds. If `immediate` is passed, trigger the function on the
-    // leading edge, instead of the trailing.
+    /**
+     * Devuelve una función que, mientras siga siendo invocada, no se ejecutará.
+     * La función será llamada después de que deje de ser invocada durante N milisegundos.
+     * Si se pasa `immediate`, activa la función en el borde principal en lugar del final.
+     * Crédito a David Walsh (https://davidwalsh.name/javascript-debounce-function).
+     * * @param {Function} func - La función a ejecutar.
+     * @param {number} wait - Tiempo de espera en milisegundos.
+     * @param {boolean} [immediate] - Si es verdadero, ejecuta la función inmediatamente.
+     * @returns {Function} Función debounced.
+     */
     function debounce(func, wait, immediate) {
         var timeout;
 
@@ -67,6 +59,11 @@ var Search = (function () {
         };
     }
 
+    /**
+     * Cierra el panel de resultados de búsqueda, limpia el foco del campo de texto
+     * y restaura el comportamiento normal de desplazamiento (scroll) de la página.
+     * * @function
+     */
     function close() {
         // Start scroll prevention: https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
         const scrollY = document.body.style.top;
@@ -84,6 +81,11 @@ var Search = (function () {
         searchField.blur();
     }
 
+    /**
+     * Maneja el evento de búsqueda introducido por el usuario, consulta a Fuse.js 
+     * y renderiza los resultados en el DOM.
+     * * @param {Event} event - El evento disparado por el campo de entrada (input).
+     */
     function search(event) {
         // Start scroll prevention: https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
         document.body.style.position = 'fixed';
@@ -106,7 +108,7 @@ var Search = (function () {
 
         form.classList.toggle('phpdocumentor-search--has-results', true);
         searchResults.classList.remove('phpdocumentor-search-results--hidden');
-        var results = fuse.search(event.target.value, {limit: 25});
+        var results = fuse.search(event.target.value, { limit: 25 });
 
         results.forEach(function (result) {
             var entry = document.createElement("li");
@@ -118,6 +120,11 @@ var Search = (function () {
         });
     }
 
+    /**
+     * Añade nuevos datos al índice de búsqueda existente.
+     * Si el motor de búsqueda ya estaba inicializado, lo reinicializa con el nuevo índice.
+     * * @param {Array<Object>} added - Arreglo de objetos a añadir al índice de búsqueda.
+     */
     function appendIndex(added) {
         index = index.concat(added);
 
@@ -127,6 +134,11 @@ var Search = (function () {
         }
     }
 
+    /**
+     * Inicializa el motor de búsqueda (Fuse.js), configura los event listeners 
+     * para la interfaz de búsqueda y habilita el campo de entrada.
+     * * @function
+     */
     function init() {
         fuse = new Fuse(index, options);
 
@@ -134,10 +146,10 @@ var Search = (function () {
         var searchField = document.querySelector('[data-search-form] input[type="search"]');
 
         var closeButton = document.querySelector('.phpdocumentor-search-results__close');
-        closeButton.addEventListener('click', function() { close() }.bind(this));
+        closeButton.addEventListener('click', function () { close() }.bind(this));
 
         var searchResults = document.querySelector('[data-search-results]');
-        searchResults.addEventListener('click', function() { close() }.bind(this));
+        searchResults.addEventListener('click', function () { close() }.bind(this));
 
         form.classList.add('phpdocumentor-search--active');
 
@@ -161,6 +173,10 @@ var Search = (function () {
     }
 })();
 
+/**
+ * Event Listener que se dispara cuando el DOM está completamente cargado.
+ * Muestra el cuadro de búsqueda si JS es soportado.
+ */
 window.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('[data-search-form]');
 
@@ -168,6 +184,10 @@ window.addEventListener('DOMContentLoaded', function () {
     form.classList.add('phpdocumentor-search--enabled');
 });
 
+/**
+ * Event Listener que se dispara cuando todos los recursos de la página han cargado.
+ * Inicializa el módulo de búsqueda.
+ */
 window.addEventListener('load', function () {
     Search.init();
 });
