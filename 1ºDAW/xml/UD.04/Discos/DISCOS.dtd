@@ -1,8 +1,0 @@
-<!ELEMENT tienda (disco+)>
-<!ELEMENT disco (nombre, artista, año, discografica)>
-<!ATTLIST disco
-    formato CDATA #REQUIRED>
-<!ELEMENT nombre (#PCDATA)>
-<!ELEMENT artista (#PCDATA)>
-<!ELEMENT año (#PCDATA)>
-<!ELEMENT discografica (#PCDATA)>

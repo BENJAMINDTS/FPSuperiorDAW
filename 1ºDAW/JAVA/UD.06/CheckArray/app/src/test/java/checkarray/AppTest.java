@@ -1,6 +1,0 @@
-package checkarray;
-
-class AppTest {
-
-    
-}

@@ -1,5 +1,0 @@
-package matrizaleatoriairregular;
-
-class AppTest {
-
-}

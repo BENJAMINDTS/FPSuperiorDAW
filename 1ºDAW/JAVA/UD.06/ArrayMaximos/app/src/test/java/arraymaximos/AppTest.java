@@ -1,5 +1,0 @@
-package arraymaximos;
-
-class AppTest {
-   
-}

@@ -1,3 +1,0 @@
-Producto1,100
-Producto2,200
-Producto3,300

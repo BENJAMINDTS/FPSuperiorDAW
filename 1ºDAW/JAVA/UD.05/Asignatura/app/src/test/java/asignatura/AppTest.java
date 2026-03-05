@@ -1,7 +1,0 @@
-package asignatura;
-
-
-class AppTest {
-
-    
-}

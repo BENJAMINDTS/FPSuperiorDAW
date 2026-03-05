@@ -1,9 +1,0 @@
-<!ELEMENT ordenes (orden+)>
-<!ELEMENT orden (id, cliente, productos)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT cliente (nombre, direccion)>
-<!ELEMENT nombre (#PCDATA)>
-<!ELEMENT direccion (#PCDATA)>
-<!ELEMENT productos (producto+)>
-<!ELEMENT producto (nombre, cantidad)>
-<!ELEMENT cantidad (#PCDATA)>

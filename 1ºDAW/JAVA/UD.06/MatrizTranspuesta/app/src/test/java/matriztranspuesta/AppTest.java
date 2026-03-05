@@ -1,5 +1,0 @@
-package matriztranspuesta;
-
-class AppTest {
-
-}

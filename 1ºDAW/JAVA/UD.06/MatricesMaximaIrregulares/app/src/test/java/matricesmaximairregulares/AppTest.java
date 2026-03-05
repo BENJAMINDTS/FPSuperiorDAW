@@ -1,5 +1,0 @@
-package matricesmaximairregulares;
-
-class AppTest {
-
-}

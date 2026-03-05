@@ -1,6 +1,0 @@
-package matricesmaxima;
-
-class AppTest {
-
-    
-}

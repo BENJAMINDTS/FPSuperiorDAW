@@ -1,6 +1,0 @@
-
-package diagonalmatriz;
-
-class AppTest {
-
-}

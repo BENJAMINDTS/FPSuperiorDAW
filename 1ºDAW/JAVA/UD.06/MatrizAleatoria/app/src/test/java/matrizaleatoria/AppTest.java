@@ -1,6 +1,0 @@
-package matrizaleatoria;
-
-class AppTest {
-
-
-}
