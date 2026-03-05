@@ -1,0 +1,1 @@
+CREATE TABLE daw`.`estudiantes` (`dni` VARCHAR(9) NOT NULL , `nombre` VARCHAR(15) NOT NULL , `email` VARCHAR(30) NOT NULL , PRIMARY KEY (`dni`(9))) ENGINE = InnoDB;

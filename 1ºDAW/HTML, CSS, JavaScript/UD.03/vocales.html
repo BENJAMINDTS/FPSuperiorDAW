@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vocales</title>
+    </head>
+    <body>
+        <script>
+            var texto= "Hola mundo"
+            var vocales = 'aeiouáéíóúüAEIOUÁÉÍÓÚÜ';
+            var n_vocales=0;
+            for (var i = 0; i < texto.length; i++) {
+                if (vocales.includes(texto[i])) {
+                    n_vocales++;
+                }   
+            }
+            document.write("El texto tiene " + n_vocales + " vocales");
+        </script>
+    </body>
+</html>

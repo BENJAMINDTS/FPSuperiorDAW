@@ -1,0 +1,24 @@
+Tarea 2 - Actualizar y Eliminar Cookies
+
+Pasos para comprobar manualmente:
+
+ACTUALIZAR COOKIE:
+1. Acceder a actualizar_cookie.php
+2. Completar el formulario con nuevo valor
+3. Ver mensaje de confirmacion "Cookie Actualizada"
+4. Verificar en herramientas de desarrollador que el valor cambio
+
+BORRAR COOKIE:
+1. Acceder a borrar_cookie.php
+2. Se redirige automaticamente a cookie_borrada.php
+3. Ver mensaje de confirmacion "Cookie Eliminada"
+4. Verificar en herramientas de desarrollador que la cookie desaparecio
+
+VALIDACIONES:
+- No permitir caracteres de control en el formulario
+- Mensaje de error si se intenta ingresar caracteres no validos
+
+Valores esperados:
+- Formulario pre-llenado con valor actual de cookie
+- Mensajes de confirmacion claros
+- Redirecciones correctas

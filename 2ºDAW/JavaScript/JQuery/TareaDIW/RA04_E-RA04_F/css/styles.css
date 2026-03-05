@@ -1,0 +1,95 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.controls {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.controls a {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.controls a:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.controls a:active {
+    transform: translateY(0);
+}
+
+/* Estilo específico para el botón Ocultar */
+#ocultar {
+    background-color: #f44336;
+}
+
+#ocultar:hover {
+    background-color: #da190b;
+}
+
+/* Estilos para la lista desordenada */
+#galeria {
+    list-style-type: none; /* Eliminar viñetas */
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilos para los elementos li */
+#galeria li {
+    display: none; /* No mostrar por defecto */
+    float: left; /* Flotar a la izquierda */
+    margin: 0px 25px 25px 25px; /* margen: top 0px, right 25px, bottom 25px, left 25px */
+}
+
+/* Estilos para las imágenes */
+#galeria img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+#galeria img:hover {
+    transform: scale(1.05);
+}
+
+/* Clearfix para contener elementos flotantes */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

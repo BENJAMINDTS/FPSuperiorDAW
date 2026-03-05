@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays - Números Pares e Impares</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Trabajando con arrays</h1>
+
+    <div class="input-container">
+      <label for="numerosInput">Ingresa números separados por comas:</label>
+      <input type="text" id="numerosInput" placeholder="Ej: 15, 3, 8, 23, 42, 7">
+      <button type="submit" id="procesarBtn">Procesar Array</button>
+      <button type="reset" id="limpiarBtn" class="btn-cerrar">Limpiar</button>
+    </div>
+
+    <div class="resultados-container">
+      <h2>Resultados</h2>
+
+      <div class="resultado-item">
+        <h3>Array Original</h3>
+        <p id="arrayOriginal">Esperando datos...</p>
+      </div>
+
+      <div class="resultado-item">
+        <h3>Números Pares Ordenados</h3>
+        <p id="pares" class="resultado-texto par"></p>
+        <p id="infoPares" class="info-texto"></p>
+      </div>
+
+      <div class="resultado-item">
+        <h3>Números Impares Ordenados</h3>
+        <p id="impares" class="resultado-texto impar"></p>
+        <p id="infoImpares" class="info-texto"></p>
+      </div>
+    </div>
+
+    <div class="datos-container">
+      <h2>Datos del Alumno</h2>
+      <p id="datosAlumno">Nombre: [Tu Nombre] | Apellidos: [Tus Apellidos] | DNI: [Tu DNI]</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

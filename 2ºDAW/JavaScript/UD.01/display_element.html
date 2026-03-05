@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio numero 4 - Display Element</title>
+</head>
+<body>
+  <h2>Ejercicio 4: Mostrar y ocultar un elemento</h2>
+  <p>Haz clic en el botón para mostrar u ocultar el texto.</p>
+  <button type="button" onclick="toggleText();">Mostrar/Ocultar Texto</button>
+  <p id="text" style="display:none;">¡Hola! Este es el texto que se muestra y oculta.</p>
+  <script>
+    function toggleText() {
+      var textElement = document.getElementById("text");
+      if (textElement.style.display === "none") {
+        textElement.style.display = "block";
+      } else {
+        textElement.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

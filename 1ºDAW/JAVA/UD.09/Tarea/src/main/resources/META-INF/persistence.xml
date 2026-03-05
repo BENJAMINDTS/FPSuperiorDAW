@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+	<persistence-unit name="tarea" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+		<class>tarea.Producto</class>
+		<!-- Habilitar la detección automática de clases de entidad -->
+		<!--        <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+		<properties>
+			<!-- Configuración de conexión con MariaDB -->
+
+            
+			<property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/20889654L"/>
+			<property name="jakarta.persistence.jdbc.user" value="bensangon"/>
+			<property name="jakarta.persistence.jdbc.password" value="foc"/>
+            
+			<!--            &lt;!&ndash; Especificar el dialecto de MariaDB &ndash;&gt;-->
+			<!--            <property name="eclipselink.target-database" value="MySQL"/>-->
+			<!--            &lt;!&ndash; Logs de EclipseLink &ndash;&gt;-->
+			<!--            <property name="eclipselink.logging.level" value="FINEST"/>-->
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<!-- Crear/actualizar tablas -->
+			<property name="hibernate.show_sql" value="false"/>
+			<!-- Logs de SQL -->
+			<property name="hibernate.format_sql" value="false"/>
+			<property name="logging.level.org.hibernate" value="WARN"/>
+			<!-- Configuración de generación de tablas -->
+			<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+			<!--            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>-->
+		</properties>
+	</persistence-unit>
+</persistence>

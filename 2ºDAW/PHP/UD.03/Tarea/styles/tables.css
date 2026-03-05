@@ -1,0 +1,109 @@
+/* TABLES.CSS
+   Estilos específicos para tablas */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.data-table thead {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.data-table th {
+    color: white;
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #e1e8ed;
+    color: #2c3e50;
+}
+
+.data-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.data-table tbody tr:nth-child(even):hover {
+    background-color: #e9ecef;
+}
+
+/* Tablas responsivas */
+.table-responsive {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+/* Variantes de tablas */
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-bordered {
+    border: 1px solid #e1e8ed;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #e1e8ed;
+}
+
+/* Tablas pequeñas */
+.table-sm th,
+.table-sm td {
+    padding: 8px 12px;
+}
+
+/* Estados de las filas */
+.table-success {
+    background-color: #d4edda !important;
+}
+
+.table-danger {
+    background-color: #f8d7da !important;
+}
+
+.table-warning {
+    background-color: #fff3cd !important;
+}
+
+.table-info {
+    background-color: #d1ecf1 !important;
+}
+
+/* Responsive para tablas */
+@media (max-width: 768px) {
+    .data-table {
+        font-size: 0.9em;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 12px;
+    }
+    
+    .table-responsive {
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+    }
+}

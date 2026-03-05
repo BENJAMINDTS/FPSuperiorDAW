@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicio 4: Añadir elementos desde script</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<header>
+		<h1>Ejercicio 4: Añadir elementos desde script</h1>
+		<p class="subtitle">Cada elemento se genera al hacer clic en su botón correspondiente</p>
+	</header>
+
+	<div class="container">
+		<!-- Ejercicio 1: Crear un párrafo -->
+		<section class="exercise">
+			<h2>1. Crear un párrafo</h2>
+			<p>Crea un script que añada un párrafo al final del body con el texto: "Este párrafo fue creado con JavaScript".
+			</p>
+			<div class="button-group">
+				<button type="button" id="btn-parrafo">Crear Párrafo</button>
+				<button type="button" class="danger" id="btn-eliminar-parrafo">Eliminar Párrafo</button>
+			</div>
+			<div id="contenedor-parrafo"></div>
+		</section>
+
+		<!-- Ejercicio 2: Añadir un título dinámicamente -->
+		<section class="exercise">
+			<h2>2. Añadir un título dinámicamente</h2>
+			<p>Escribe un script que cree un elemento &lt;h2&gt; con el texto "Bienvenido a mi página" y lo inserte dentro de
+				un elemento con id "encabezado".</p>
+			<div class="button-group">
+				<button type="button" id="btn-titulo">Crear Título</button>
+				<button type="button" class="danger" id="btn-eliminar-titulo">Eliminar Título</button>
+			</div>
+			<div id="encabezado"></div>
+		</section>
+
+		<!-- Ejercicio 3: Insertar un botón en una sección -->
+		<section class="exercise">
+			<h2>3. Insertar un botón en una sección</h2>
+			<p>Crea un botón con el texto "Haz clic aquí" y añádelo dentro del elemento con id "seccion-botones".</p>
+			<div class="button-group">
+				<button type="button" id="btn-boton">Crear Botón</button>
+				<button type="button" class="danger" id="btn-eliminar-boton">Eliminar Botón</button>
+			</div>
+			<div id="seccion-botones"></div>
+		</section>
+
+		<!-- Ejercicio 4: Agregar varios párrafos -->
+		<section class="exercise">
+			<h2>4. Agregar varios párrafos</h2>
+			<p>Crea un bucle que genere 3 párrafos con los textos "Párrafo 1", "Párrafo 2", "Párrafo 3" y los añada todos al
+				body.</p>
+			<div class="button-group">
+				<button type="button" id="btn-parrafos">Crear Párrafos</button>
+				<button type="button" class="danger" id="btn-eliminar-parrafos">Eliminar Párrafos</button>
+			</div>
+			<div id="contenedor-parrafos"></div>
+		</section>
+
+		<!-- Ejercicio 5: Lista de tareas -->
+		<section class="exercise">
+			<h2>5. Lista de tareas</h2>
+			<p>En un contenedor con id "lista-tareas", crea una lista &lt;ul&gt; con tres elementos &lt;li&gt; que contengan
+				las tareas: "Estudiar", "Comer", "Dormir".</p>
+			<div class="button-group">
+				<button type="button" id="btn-lista-tareas">Crear Lista</button>
+				<button type="button" class="danger" id="btn-eliminar-lista-tareas">Eliminar Lista</button>
+			</div>
+			<div id="lista-tareas"></div>
+		</section>
+
+		<!-- Ejercicio 6: Generar elementos desde un array -->
+		<section class="exercise">
+			<h2>6. Generar elementos desde un array</h2>
+			<p>Dado el siguiente array: ["Manzana", "Banana", "Naranja"], crea una lista &lt;ul&gt; y, usando un bucle, añade
+				un &lt;li&gt; para cada fruta.</p>
+			<div class="button-group">
+				<button type="button" id="btn-lista-frutas">Crear Lista de Frutas</button>
+				<button type="button" class="danger" id="btn-eliminar-lista-frutas">Eliminar Lista</button>
+			</div>
+			<div id="contenedor-lista-frutas"></div>
+		</section>
+
+		<!-- Ejercicio 7: Insertar una imagen -->
+		<section class="exercise">
+			<h2>7. Insertar una imagen</h2>
+			<p>Crea un elemento &lt;img&gt; con src="imagen.jpg" y alt="Foto de ejemplo", y añádelo al final del body.</p>
+			<div class="button-group">
+				<button type="button" id="btn-imagen">Crear Imagen</button>
+				<button type="button" class="danger" id="btn-eliminar-imagen">Eliminar Imagen</button>
+			</div>
+			<div id="contenedor-imagen"></div>
+		</section>
+
+		<!-- Ejercicio 8: Botón que crea un elemento nuevo -->
+		<section class="exercise">
+			<h2>8. Botón que crea un elemento nuevo</h2>
+			<p>Crea un botón con el texto "Añadir párrafo". Al hacer clic, debe crear un nuevo &lt;p&gt; con el texto "Nuevo
+				párrafo creado" y añadirlo debajo del botón.</p>
+			<div class="button-group">
+				<button type="button" id="btn-boton-parrafo">Crear Botón de Párrafo</button>
+				<button type="button" class="danger" id="btn-eliminar-boton-parrafo">Eliminar Botón</button>
+			</div>
+			<div id="contenedor-boton-parrafo"></div>
+		</section>
+
+		<!-- Ejercicio 9: Contador de clics -->
+		<section class="exercise">
+			<h2>9. Contador de clics</h2>
+			<p>Crea un botón con el texto "Haz clic". Cada vez que el usuario lo pulse, se debe crear un nuevo párrafo que
+				diga "Has hecho X clics", donde X es el número de veces que se ha pulsado.</p>
+			<div class="button-group">
+				<button type="button" id="btn-contador">Crear Contador</button>
+				<button type="button" class="danger" id="btn-reset-contador">Resetear Contador</button>
+			</div>
+			<div id="contenedor-contador"></div>
+		</section>
+
+		<!-- Ejercicio 10: Crear una tarjeta con varios elementos -->
+		<section class="exercise">
+			<h2>10. Crear una tarjeta con varios elementos</h2>
+			<p>Crea dinámicamente una "tarjeta" (&lt;div&gt;) que contenga: Un título (&lt;h3&gt;) con el texto "Tarjeta
+				creada", un párrafo (&lt;p&gt;) con una descripción y una imagen (&lt;img&gt;).</p>
+			<div class="button-group">
+				<button type="button" id="btn-tarjeta">Crear Tarjeta</button>
+				<button type="button" class="danger" id="btn-eliminar-tarjeta">Eliminar Tarjeta</button>
+			</div>
+			<div id="tarjetas"></div>
+		</section>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>

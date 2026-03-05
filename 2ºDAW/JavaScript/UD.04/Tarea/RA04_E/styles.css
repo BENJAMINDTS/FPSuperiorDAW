@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+    width: 100%;
+    max-width: 800px;
+}
+
+h1, h2, h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #667eea;
+}
+
+/* Contenedor de entrada */
+.input-container {
+    background: #f7fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 2px dashed #cbd5e0;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+#numerosInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+#numerosInput:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Contenedores de resultados */
+.resultados-container {
+    background: #f7fafc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.resultado-item {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 3px solid #667eea;
+    text-align: left;
+}
+
+.resultado-texto {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.par {
+    color: #2b6cb0;
+    background: #ebf8ff;
+    border: 1px solid #bee3f8;
+}
+
+.impar {
+    color: #c53030;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+}
+
+.info-texto {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Contenedor de datos personales */
+.datos-container {
+    background: #e6fffa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 3px solid #38b2ac;
+}
+
+#datosAlumno {
+    font-size: 1.1rem;
+    color: #2d3748;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* Estilos para botones */
+button {
+    background-color: #667eea;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #5a67d8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cerrar {
+    background-color: #e53e3e;
+}
+
+.btn-cerrar:hover {
+    background-color: #c53030;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    h3 {
+        font-size: 1rem;
+    }
+    
+    .resultado-texto {
+        font-size: 1rem;
+        padding: 8px;
+    }
+    
+    #datosAlumno {
+        font-size: 1rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .input-container,
+    .resultados-container,
+    .datos-container {
+        padding: 15px;
+    }
+}

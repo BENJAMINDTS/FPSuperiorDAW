@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicios AJAX - JSONPlaceholder</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>Ejercicios AJAX</h1>
+  <div id="output" class="result">Resultados aquí...</div>
+
+  <section>
+    <h2>1. Cargar Datos (GET)</h2>
+    <button type="button" onclick="ejercicio1()">Cargar Post 1</button>
+  </section>
+
+  <section>
+    <h2>2. Enviar Datos (POST)</h2>
+    <input type="text" id="postTitle" placeholder="Nombre">
+    <textarea id="postBody" placeholder="Comentario"></textarea>
+    <button type="button" onclick="ejercicio2()">Enviar</button>
+  </section>
+
+  <section>
+    <h2>3. Lista de Usuarios</h2>
+    <button type="button" onclick="ejercicio3()">Ver Usuarios</button>
+    <ul id="userList"></ul>
+  </section>
+
+  <section>
+    <h2>4. Búsqueda</h2>
+    <input type="text" id="searchInput" placeholder="Buscar posts..." onkeyup="debounceSearch()">
+    <div id="searchResults"></div>
+  </section>
+
+  <section>
+    <h2>5. Actualizar Post 1</h2>
+    <button type="button" onclick="ejercicio5()">Actualizar Título y Cuerpo</button>
+  </section>
+
+  <section>
+    <h2>6. Error AJAX</h2>
+    <button type="button" onclick="ejercicio6()">Forzar Error</button>
+  </section>
+
+  <section>
+    <h2>7. Paginación</h2>
+    <div id="commentsList"></div>
+    <button type="button" onclick="changePage(-1)">Anterior</button>
+    <span id="pageIndicator">Página 1</span>
+    <button type="button" onclick="changePage(1)">Siguiente</button>
+  </section>
+
+  <section>
+    <h2>8. Eliminar Posts</h2>
+    <button type="button" onclick="ejercicio8()">Cargar lista para eliminar</button>
+    <div id="deleteList"></div>
+  </section>
+
+  <section>
+    <h2>9. Galería Scroll Infinito</h2>
+    <div id="gallery"></div>
+  </section>
+
+  <section>
+    <h2>10. Posts + Autores</h2>
+    <button type="button" onclick="ejercicio10()">Combinar Datos</button>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

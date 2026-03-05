@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tienda>
+	<nombre>Mi Tienda</nombre>
+	<descripción>Descripción de la tienda</descripción>
+	<dirección>Dirección de la tienda</dirección>
+	<productos num="1">
+		<producto codigo="KB22">
+			<nombre>AAAAAAAA</nombre>
+			<categoria>HOGAR</categoria>
+			<cantidad>12</cantidad>
+			<precio>12.0</precio>
+			<descripcion>AAAAAAAAA</descripcion>
+		</producto>
+	</productos>
+</tienda>

@@ -1,0 +1,50 @@
+Tarea 4 - Carrito Persistente (Piezas de Coche)
+
+Pasos para comprobar manualmente:
+
+1. Acceder a catalog.php
+   - Ver 12 piezas de coche organizadas en 8 categorias
+   - Cada categoria con su seccion propia
+   - Estadisticas del catalogo (total productos, categorias, precio medio)
+   - Diseño de tarjetas para cada producto
+
+2. Añadir varias piezas al carrito
+   - Probar diferentes categorias (frenos, motor, electrico, etc.)
+   - Ver mensaje de confirmacion al añadir
+   - Los productos se acumulan en el carrito
+
+3. Acceder a cart.php
+   - Ver lista detallada de piezas añadidas
+   - Informacion por categoria en el carrito
+   - Control de cantidades con formulario de actualizacion
+   - Calculos automaticos: subtotal, IVA, total con impuestos
+
+4. Probar funcionalidades avanzadas:
+   - Actualizar cantidades de piezas (min: 1, max: 99)
+   - Eliminar piezas individuales
+   - Vaciar carrito completo
+   - Ver advertencia cuando el tamaño se acerca a 4KB
+
+5. Verificar calculos financieros:
+   - Precio unitario correcto por pieza
+   - Subtotal = precio * cantidad
+   - IVA calculado al 21%
+   - Total con IVA correcto
+
+6. Probar limite de tamaño:
+   - Añadir muchas piezas o aumentar cantidades
+   - Ver advertencia al acercarse a 3000 bytes
+   - Ver mensaje de error si supera 4096 bytes
+
+7. Verificar en herramientas de desarrollador:
+   - Cookie "cart" con estructura JSON de repuestos
+   - Organizacion por IDs y categorias
+   - Tamaño real de la cookie
+
+Valores esperados:
+- 12 productos de repuestos de coche
+- 8 categorias diferentes
+- Precios realistas para piezas de automovil
+- Calculos correctos con IVA del 21%
+- Gestion avanzada de cantidades
+- Sistema de advertencias por tamaño

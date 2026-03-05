@@ -1,0 +1,2 @@
+CREATE TABLE `daw`.`usuarios4` (`id` INT NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `usuarios4` ADD `password` VARCHAR(255) NOT NULL AFTER `email`;

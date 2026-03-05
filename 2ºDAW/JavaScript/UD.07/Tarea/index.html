@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarea RA7 - BenjaminDTS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Gestión de Catálogo Musical</h1>
+
+    <section class="card">
+      <h2>Carga de Artistas (XML)</h2>
+      <p>Uso de XMLHttpRequest y manipulación de nodos estándar.</p>
+      <button type="button" id="btnXML">Rellena la lista desplegable</button>
+      <select  id="listaArtistas">
+        <option>Lista vacía antes de pulsar el botón</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>Carga de Álbumes (JSON)</h2>
+      <p>Petición asíncrona a API externa.</p>
+      <button type="button" id="btnJSON">Cargar álbumes (JSON)</button>
+      <ul id="listaAlbumes"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Versión jQuery (XML)</h2>
+      <p>Misma funcionalidad XML pero simplificada con $.get.</p>
+      <button type="button" id="btnJQuery">Cargar XML con jQuery</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

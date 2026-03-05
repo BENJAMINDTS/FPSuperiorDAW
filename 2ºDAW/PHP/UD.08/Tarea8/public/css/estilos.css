@@ -1,0 +1,87 @@
+/* public/css/estilos.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.results {
+    margin-top: 1rem;
+}
+
+.book-card {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 0;
+}
+
+.book-card:last-child {
+    border-bottom: none;
+}
+
+.book-title {
+    font-weight: bold;
+    color: #111827;
+    font-size: 1.1em;
+}
+
+.book-author {
+    color: #6b7280;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.error {
+    color: #dc2626;
+    background-color: #fef2f2;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-top: 8px;
+    display: none;
+    border: 1px solid #fecaca;
+}

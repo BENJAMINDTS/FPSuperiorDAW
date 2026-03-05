@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tienda SYSTEM "TiendaDeRopa.dtd">
+<tienda>
+    <articulo codigo="001" categoria="ropa">
+        <nombre>Camiseta</nombre>
+        <talla>M</talla>
+        <precio moneda="USD">19.99</precio>
+    </articulo>
+    <articulo codigo="002" categoria="ropa">
+        <nombre>Pantalón</nombre>
+        <talla>L</talla>
+        <precio moneda="USD">29.99</precio>
+    </articulo>
+</tienda>

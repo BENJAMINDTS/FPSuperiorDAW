@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Number</title>
+</head>
+<body>
+  <h1>Adivina el número del 1 al 10</h1>
+  <!-- Botón que llama a la función para adivinar el número -->
+  <button type="button" onclick="checkNumber()">Adivinar</button>
+  <script>
+  // Función que verifica si el usuario adivinó el número secreto
+  function checkNumber() {
+    // Genera un número aleatorio entre 1 y 10
+    let numeroSecreto = Math.floor(Math.random() * 10) + 1;
+    // Solicita al usuario que introduzca un número
+    let userInput = prompt("Introduce un número del 1 al 10:");
+    // Compara el número introducido con el número secreto
+    if (userInput == numeroSecreto) {
+      // Si acierta, muestra mensaje de felicitación
+      alert('¡Felicidades! Has adivinado el número.');
+    } else {
+      // Si falla, muestra el número correcto
+      alert('Lo siento, intenta de nuevo. El número era ' + numeroSecreto + '.');
+    }
+  }
+  </script>
+</body>
+</html>

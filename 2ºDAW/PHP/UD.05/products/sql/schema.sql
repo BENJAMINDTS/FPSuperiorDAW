@@ -1,0 +1,2 @@
+CREATE TABLE `daw`.`productos` (`id` INT(2) NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(50) NOT NULL , `precio` FLOAT(10) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+INSERT INTO `productos` (`id`, `nombre`, `precio`) VALUES (NULL, 'Raton', '25.99'), (NULL, 'Teclado', '40.5'), (NULL, 'Silla', '120.29'), (NULL, 'Monitor', '99.99'), (NULL, 'Altavoces', '45.69')

@@ -1,0 +1,201 @@
+:root {
+    --bg-color: #0f172a;       /* Azul muy oscuro */
+    --card-bg: #1e293b;        /* Azul grisáceo */
+    --text-main: #e2e8f0;      /* Blanco suave */
+    --text-muted: #94a3b8;     /* Gris texto secundario */
+    --primary: #38bdf8;        /* Cyan neón */
+    --secondary: #818cf8;      /* Índigo neón */
+    --accent: #f472b6;         /* Rosa para errores/eliminar */
+    --radius: 12px;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- Layout Principal --- */
+section {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.5rem;
+}
+
+/* --- Inputs y Botones --- */
+input, textarea {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+button {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: #0f172a;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: filter 0.3s, transform 0.1s;
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    button { width: auto; }
+}
+
+button:hover {
+    filter: brightness(1.2);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Estilos específicos para botones secundarios */
+section:nth-child(9) button, 
+button[onclick*="changePage"] {
+    background: #334155;
+    color: white;
+}
+
+section:nth-child(9) button:hover {
+    background: var(--accent);
+}
+
+/* --- Zona de Resultados --- */
+.result {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--secondary);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-family: 'Courier New', monospace;
+    min-height: 40px;
+    overflow-wrap: break-word;
+}
+
+/* --- Listas y Items --- */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-item, .post-item, li {
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-item:hover, .post-item:hover, li:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--primary);
+}
+
+/* --- Galería (Scroll Infinito) --- */
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#gallery img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.2s;
+    border: 1px solid #334155;
+}
+
+#gallery img:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-color: var(--primary);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+/* --- Responsive Grid para Desktop --- */
+@media (min-width: 768px) {
+    body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        align-items: start;
+    }
+    h1, #output {
+        grid-column: 1 / -1;
+    }
+}

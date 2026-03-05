@@ -1,0 +1,29 @@
+Tarea 3 - Preferencia de Idioma
+
+Pasos para comprobar manualmente:
+
+1. Acceder a index.php por primera vez
+   - Debe mostrarse en español (idioma por defecto)
+   - Mensaje: "No hay preferencia de idioma guardada"
+
+2. Seleccionar "English" en el formulario y enviar
+   - La pagina debe recargarse en ingles
+   - Mensaje de confirmacion: "Language stored in cookie: ENGLISH"
+
+3. Recargar la pagina o cerrar y volver a abrir el navegador
+   - Debe mantenerse en ingles (cookie persistente)
+
+4. Hacer clic en "Reset language"
+   - Debe volver al español por defecto
+   - Mensaje de no preferencia guardada
+
+5. Verificar en herramientas de desarrollador:
+   - Cookie "lang" con valor "es" o "en"
+   - Fecha de expiracion de 1 año
+   - Atributo lang en HTML cambiando dinamicamente
+
+Valores esperados:
+- Idioma por defecto: es (español)
+- Idiomas soportados: es, en
+- Caducidad cookie: 1 año
+- Textos completamente traducidos

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <meta charset= UTF8 />
+        <title>Ejemplo de etiquetas HTML5 para crear frmularios</title>
+    </head>
+    <body>
+        <form action="LSSM_U02_05_FormulariosHTML5.HTML">
+            <h1>Ejemplo de etiquetas HTML5 para crear frmularios</h1>
+            <div>
+                <h2>text</h2>
+                nombre <imput name="USER" ; id="" type="text" required></imput> <br>
+                <h2>Radio</h2>
+                Sexo <br>
+                Hombre <input type="radio"; name="Sexo"; value="Hombre">
+                Mujer <input type="radio"; name="Sexo"; value="Mujer">
+                <h2>Select</h2>
+                coches:
+                <select name="Coches" id="Coche">
+                    
+                    <option>Coupe</option>
+                    <option>Sedan</option>
+                    <option>Pick-Up</option>
+                </select><br>
+                <h2>textarea</h2>
+                observaciones <br>
+                <textarea name="observaciones" id="observaciones" cols="50" rows="5"></textarea><br>
+                <h2>Datalist</h2>
+                elige buscador: <input list="Browser"/>
+                <datalist id="Browser">
+                    <option>Google</option>
+                    <option>Mozzilla Firefox</option>
+                    <option>Opera</option>
+                </datalist><br>
+                <h2>Contraseña</h2>
+                Contraseña <input name="password" type="password" required><br>
+                <h2>Checkbox</h2>
+                ¿Que vehiculo tienes <br>
+                    Bici <input type="checkbox">
+                    Coche <input type="checkbox">
+                    Moto <input type="checkbox"> <br>
+                <h2>Color</h2>
+                Color favorito <input type="color"/> <br>
+                <h2>Fecha</h2> 
+                Fecha: <input type="date"> <br>
+                <h2>Datetime</h2>
+                datetime <input type="datetime-local"><br>
+                <h2>email</h2><br>
+                email <input type="email"><br>
+                <h2>Number</h2>
+                Number <input type="number"><br>
+                <h2>Points</h2>
+                numero desde y hasta <input type="number" max="100" min="1"><br>
+                <h2>Range</h2>
+                Rango <input type="range"/> <br>
+                <h2>Search</h2>
+                Busqueda <input type="search"> <br>
+                <h2>time</h2>
+                time <input type="time"><br>
+                <h2>url</h2>
+                url <input type="url"><br>
+                <h2>week</h2>
+                semana del año <input type="week"><br>
+                <h2>file</h2>
+                fichero <input type="file"><br>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </body>
+</html>

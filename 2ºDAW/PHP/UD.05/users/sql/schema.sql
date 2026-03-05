@@ -1,0 +1,2 @@
+CREATE TABLE `daw`.`users` (`id` INT(4) NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(20) NOT NULL , `email` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+INSERT INTO `users` (`id`, `nombre`, `email`) VALUES (NULL, 'Benjamin', 'benjamin.pk02@gmail.com'), (NULL, 'Jose', 'jose@gmail.com'), (NULL, 'Manu', 'manu@gmail.com'), (NULL, 'Sebas', 'sebas@gmail.com')
