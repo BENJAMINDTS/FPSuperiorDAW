@@ -1,7 +1,7 @@
 <?php
 require_once 'controllers/UsuarioController.php';
 
-$controller = new UsuarioController();
+$controller = new UsuarioController($pdo);
 
 $accion = $_GET['accion'] ?? 'registro';
 
