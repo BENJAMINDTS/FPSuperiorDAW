@@ -1,13 +1,43 @@
-#xVamos a conectar a una base de datos SQLite y crear una tabla para almacenar productos.
+"""
+# RA05_D - Funciones de Base de Datos SQLite para Productos
+
+Módulo con funciones procedurales para conectar a una BD SQLite
+y gestionar la tabla `productos` (crear, insertar y mostrar registros).
+"""
+
 import sqlite3
-# Conexión a la base de datos (o creación si no existe)
-def conectar_db(nombre_db ="tienda.db"):
+
+
+def conectar_db(nombre_db="tienda.db"):
+    """Crea o abre una base de datos SQLite y devuelve la conexión.
+
+    Args:
+        nombre_db (str): Nombre del archivo de base de datos (por defecto 'tienda.db').
+
+    Returns:
+        sqlite3.Connection: Objeto de conexión a la base de datos.
+    """
     return sqlite3.connect(nombre_db)
-# Desconexión de la base de datos
+
+
 def deconectar_db(conexion):
+    """Cierra la conexión a la base de datos SQLite.
+
+    Args:
+        conexion (sqlite3.Connection): Conexión activa a cerrar.
+    """
     conexion.close()
-# Crear tabla productos
+
+
 def crear_tabla_productos(conexion):
+    """Crea la tabla `productos` en la base de datos si no existe.
+
+    La tabla incluye: id (PK), nombre (NOT NULL) y precio (NOT NULL, ≥ 0).
+    Usa `try/except` para ignorar el error si la tabla ya existe.
+
+    Args:
+        conexion (sqlite3.Connection): Conexión activa a la base de datos.
+    """
     cursor = conexion.cursor()
     try:
         cursor.execute("""
@@ -18,11 +48,9 @@ def crear_tabla_productos(conexion):
             )
         """)
     except sqlite3.OperationalError:
+        # La tabla ya existe; no es necesario volver a crearla
         print("La tabla ya existe.")
     finally:
         cursor.close()
         conexion.commit()
     conexion.commit()
-    
-
-
