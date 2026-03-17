@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pelicula.titulo }}{% endblock %}
+
+{% block body %}
+    <h1>{{ pelicula.titulo }}</h1>
+
+    <div class="detail-row">
+        <span class="detail-label">ID</span>
+        <span class="detail-value">#{{ pelicula.id }}</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Director</span>
+        <span class="detail-value">{{ pelicula.director }}</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Año</span>
+        <span class="detail-value">{{ pelicula.anio }}</span>
+    </div>
+
+    <div style="display:flex; gap:0.75rem; margin-top:2rem; flex-wrap:wrap;">
+        <a href="/peliculas" style="
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        ">← Volver al listado</a>
+        <a href="/pelicula/{{ pelicula.id }}/editar" style="
+            background: rgba(251,146,60,0.12);
+            border: 1px solid rgba(251,146,60,0.35);
+            color: #fb923c;
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        ">Editar</a>
+        <a href="/pelicula/{{ pelicula.id }}/eliminar" style="
+            background: rgba(248,113,113,0.12);
+            border: 1px solid rgba(248,113,113,0.35);
+            color: #f87171;
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        ">Eliminar</a>
+    </div>
+{% endblock %}

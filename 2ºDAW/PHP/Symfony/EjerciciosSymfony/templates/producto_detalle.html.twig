@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producto #{{ id }}{% endblock %}
+
+{% block body %}
+    <h1>Producto</h1>
+    <div class="detail-row">
+        <span class="detail-label">ID</span>
+        <span class="detail-value">#{{ id }}</span>
+    </div>
+    <p style="margin-top:1.5rem;color:rgba(255,255,255,0.4);font-size:0.9rem;">
+        Ejercicio 5 — Ruta <code style="background:rgba(167,139,250,0.15);padding:2px 8px;border-radius:6px;color:#a78bfa;">/producto/{id}</code>
+    </p>
+{% endblock %}

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Usuario/Desktop/EjerciciosSymfony/**)",
+      "Bash(composer require:*)",
+      "Bash(php bin/console doctrine:database:create)",
+      "Bash(php bin/console make:migration)",
+      "Bash(php bin/console doctrine:migrations:migrate --no-interaction)",
+      "Bash(composer create-project:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Usuario\\Desktop\\EjerciciosSymfony\\templates"
+    ]
+  }
+}

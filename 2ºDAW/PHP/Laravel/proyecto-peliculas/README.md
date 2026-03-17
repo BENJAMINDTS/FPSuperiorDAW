@@ -1,59 +1,146 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel — Proyecto Películas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación de gestión de películas construida con **Laravel 12** que expone una **API REST** completa con panel de control web.
 
-## About Laravel
+## Tecnologías
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Herramienta     | Versión              |
+| --------------- | -------------------- |
+| PHP             | >= 8.2               |
+| Laravel         | 12.x                 |
+| Base de datos   | SQLite (por defecto) |
+| Motor de vistas | Blade                |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requisitos previos
 
-## Learning Laravel
+- PHP >= 8.2 con extensiones: `pdo`, `pdo_sqlite`, `mbstring`, `openssl`, `tokenizer`, `xml`
+- [Composer](https://getcomposer.org/) instalado globalmente
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalación y despliegue
 
-## Laravel Sponsors
+```bash
+# 1. Clonar el repositorio (si no lo tienes ya)
+git clone <url-del-repo>
+cd proyecto-peliculas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 2. Instalar dependencias PHP
+composer install
 
-### Premium Partners
+# 3. Copiar el fichero de entorno
+cp .env.example .env
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 4. Generar la clave de la aplicación
+php artisan key:generate
 
-## Contributing
+# 5. Crear la base de datos SQLite y ejecutar migraciones
+touch database/database.sqlite
+php artisan migrate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 6. Levantar el servidor de desarrollo
+php artisan serve
+```
 
-## Code of Conduct
+La aplicación estará disponible en `http://127.0.0.1:8000`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Endpoints de la API
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+El controlador `PeliculaController` gestiona todos los recursos mediante `apiResource`.
 
-## License
+| Método        | Ruta                | Acción    | Descripción                    |
+| ------------- | ------------------- | --------- | ------------------------------ |
+| `GET`         | `/peliculas`        | `index`   | Listar todas las películas     |
+| `POST`        | `/peliculas`        | `store`   | Crear una nueva película       |
+| `GET`         | `/peliculas/{id}`   | `show`    | Ver detalle de una película    |
+| `PUT/PATCH`   | `/peliculas/{id}`   | `update`  | Actualizar una película        |
+| `DELETE`      | `/peliculas/{id}`   | `destroy` | Eliminar una película          |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Rutas web
+
+| Método  | Ruta      | Descripción                    |
+| ------- | --------- | ------------------------------ |
+| `GET`   | `/`       | Redirige al panel              |
+| `GET`   | `/panel`  | Panel de control interactivo   |
+
+---
+
+## Estructura del proyecto
+
+```text
+proyecto-peliculas/
+├── app/
+│   └── Http/
+│       └── Controllers/
+│           └── PeliculaController.php   # CRUD completo de películas
+├── routes/
+│   └── web.php                          # Rutas web y apiResource
+├── resources/
+│   └── views/                           # Plantillas Blade (panel)
+├── database/
+│   └── migrations/                      # Migraciones de la BD
+├── .env.example
+└── composer.json
+```
+
+---
+
+## Variables de entorno relevantes
+
+```dotenv
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=sqlite
+# DB_DATABASE=/absolute/path/to/database.sqlite
+```
+
+---
+
+## Pruebas con la API
+
+Puedes probar los endpoints con [Postman](https://www.postman.com/), [Insomnia](https://insomnia.rest/) o `curl`:
+
+```bash
+# Listar películas
+curl http://127.0.0.1:8000/peliculas
+
+# Crear una película (ejemplo)
+curl -X POST http://127.0.0.1:8000/peliculas \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"titulo": "El Padrino", "anio": 1972, "director": "Francis Ford Coppola"}'
+
+# Ver detalle
+curl http://127.0.0.1:8000/peliculas/1
+
+# Actualizar
+curl -X PUT http://127.0.0.1:8000/peliculas/1 \
+  -H "Content-Type: application/json" \
+  -d '{"titulo": "El Padrino (Actualizado)"}'
+
+# Eliminar
+curl -X DELETE http://127.0.0.1:8000/peliculas/1
+```
+
+---
+
+## Comandos útiles
+
+```bash
+# Ver todas las rutas registradas
+php artisan route:list
+
+# Limpiar caché
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+
+# Ejecutar tests
+php artisan test
+```

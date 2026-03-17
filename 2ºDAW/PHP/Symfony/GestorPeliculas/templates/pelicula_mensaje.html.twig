@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block body %}
+
+    {% if tipo == 'exito' %}
+        {% set color  = '#4ade80' %}
+        {% set bg     = 'rgba(74,222,128,0.08)' %}
+        {% set border = 'rgba(74,222,128,0.3)' %}
+    {% elseif tipo == 'actualizar' %}
+        {% set color  = '#fb923c' %}
+        {% set bg     = 'rgba(251,146,60,0.08)' %}
+        {% set border = 'rgba(251,146,60,0.3)' %}
+    {% elseif tipo == 'eliminar' %}
+        {% set color  = '#f87171' %}
+        {% set bg     = 'rgba(248,113,113,0.08)' %}
+        {% set border = 'rgba(248,113,113,0.3)' %}
+    {% else %}
+        {% set color  = '#fbbf24' %}
+        {% set bg     = 'rgba(251,191,36,0.08)' %}
+        {% set border = 'rgba(251,191,36,0.3)' %}
+    {% endif %}
+
+    <div style="text-align:center; padding: 1rem 0 0.5rem;">
+        <span style="font-size:3.5rem; display:block; margin-bottom:1rem; animation: pop 0.4s ease both;">{{ icono }}</span>
+
+        <h1 style="background:none; -webkit-text-fill-color:{{ color }}; color:{{ color }}; margin-bottom:1rem;">
+            {{ titulo }}
+        </h1>
+
+        <div style="
+            background: {{ bg }};
+            border: 1px solid {{ border }};
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        ">{{ mensaje }}</div>
+
+        <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+            <a href="/peliculas" style="
+                background: linear-gradient(135deg, #fb923c, #fbbf24);
+                color: #0d0d14;
+                text-decoration: none;
+                padding: 0.6rem 1.4rem;
+                border-radius: 10px;
+                font-weight: 700;
+                font-size: 0.9rem;
+            ">Ver todas las películas</a>
+            <a href="/pelicula/insertar" style="
+                background: rgba(255,255,255,0.07);
+                border: 1px solid rgba(255,255,255,0.15);
+                color: rgba(255,255,255,0.7);
+                text-decoration: none;
+                padding: 0.6rem 1.4rem;
+                border-radius: 10px;
+                font-weight: 600;
+                font-size: 0.9rem;
+            ">Insertar otra película</a>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pop {
+            0%   { transform: scale(0.5); opacity: 0; }
+            70%  { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+{% endblock %}

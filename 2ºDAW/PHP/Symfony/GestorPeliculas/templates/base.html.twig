@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GestorPeliculas{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d14;
+            color: #e0e0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background:
+                radial-gradient(ellipse at 15% 50%, rgba(234, 88, 12, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 20%, rgba(234, 179, 8, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 55% 85%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgMove 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0%   { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(25px, 15px) rotate(2deg); }
+        }
+
+        /* Navbar */
+        nav {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fb923c, #fbbf24, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            gap: 0.3rem;
+            align-items: center;
+        }
+
+        nav ul li {
+            background: none;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        nav ul li:hover {
+            background: none;
+            border: none;
+            transform: none;
+        }
+
+        nav ul a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: block;
+        }
+
+        nav ul a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Contenido */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem 3rem;
+            max-width: 760px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5),
+                        inset 0 0 0 1px rgba(255,255,255,0.04);
+            animation: fadeUp 0.45s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fb923c 0%, #fbbf24 50%, #f87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        ul li {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.2s;
+        }
+
+        ul li:hover {
+            background: rgba(251,146,60,0.1);
+            border-color: rgba(251,146,60,0.35);
+            transform: translateX(5px);
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .detail-row:last-child { border-bottom: none; }
+
+        .detail-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #fb923c;
+            min-width: 90px;
+        }
+
+        .detail-value {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer span {
+            background: linear-gradient(135deg, #fb923c, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+    </style>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+<nav>
+    <a class="logo" href="/peliculas">🎬 GestorPeliculas</a>
+    <ul>
+        <li><a href="/peliculas">Películas</a></li>
+        <li><a href="/pelicula/insertar">Insertar</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="card">
+        {% block body %}{% endblock %}
+    </div>
+</main>
+
+<footer>
+    Hecho con <span>Symfony 7</span> · PHP 8.2
+</footer>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

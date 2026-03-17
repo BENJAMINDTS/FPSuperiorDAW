@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ciudades{% endblock %}
+
+{% block body %}
+    <h1>Ciudades de España</h1>
+    <ul>
+        {% for ciudad in ciudades %}
+            <li>{{ ciudad }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
