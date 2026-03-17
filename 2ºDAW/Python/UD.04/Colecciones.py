@@ -1,14 +1,22 @@
-# 1. Gestión de una lista de estudiantes
-#Creación de la lista inicial de estudiantes
+"""
+# Colecciones - Gestión de Estudiantes y Calificaciones
+
+Demuestra el uso combinado de listas y diccionarios para gestionar
+alumnos y sus calificaciones, incluyendo lectura/escritura de archivos.
+"""
+
+# ---- 1. Gestión de una lista de estudiantes ----
+
+# Crear la lista inicial con tres estudiantes
 estudiantes = ["Ana", "Luis", "Marta"]
 print("Lista inicial de estudiantes:", estudiantes)
 
-#Añadir un nuevo alumno a la lista
+# Añadir un nuevo alumno a la lista con append()
 nuevo_alumno = input("Introduce el nombre de un nuevo alumno: ")
 estudiantes.append(nuevo_alumno)
 print("Lista después de añadir un alumno:", estudiantes)
 
-#Eliminar un alumno de la lista
+# Eliminar un alumno de la lista si existe
 alumno_a_eliminar = input("Introduce el nombre del alumno a eliminar: ")
 if alumno_a_eliminar in estudiantes:
     estudiantes.remove(alumno_a_eliminar)
@@ -16,23 +24,23 @@ if alumno_a_eliminar in estudiantes:
 else:
     print(f"{alumno_a_eliminar} no se encuentra en la lista.")
 
-#Ordenar la lista alfabéticamente
+# Ordenar la lista alfabéticamente con sort()
 estudiantes.sort()
 print("Lista ordenada alfabéticamente:", estudiantes)
 
-# 2. Gestión de un diccionario de calificaciones
+# ---- 2. Gestión de un diccionario de calificaciones ----
+
 calificaciones = {
     "Ana": 8.5,
     "Luis": 7.0,
     "Marta": 9.2
 }
 
-#Añadir o actualizar una nota para un alumno
+# Añadir o actualizar la nota de un alumno (admite decimales)
 nombre_alumno_nota = input("Introduce el nombre del alumno para añadir/actualizar su nota: ")
 try:
-  #Pedir la nota del alumno
     nota_alumno = float(input(f"Introduce la nota de {nombre_alumno_nota} (0-10): "))
-    #Validar que la nota esté entre 0 y 10
+    # Validar que la nota esté dentro del rango permitido
     if 0 <= nota_alumno <= 10:
         calificaciones[nombre_alumno_nota] = nota_alumno
         print(f"Nota de {nombre_alumno_nota} actualizada a {nota_alumno}.")
@@ -41,11 +49,11 @@ try:
 except ValueError:
     print("Entrada inválida para la nota. Debe ser un número.")
 
-#Consultar la nota de un alumno
+# Consultar la nota de un alumno concreto
 alumno_a_consultar = input("Introduce el nombre del alumno para consultar su nota: ")
-#Obtener la nota del alumno
 nota_consultada = calificaciones.get(alumno_a_consultar, "No encontrado")
-#Mostrar la nota
+
+# Mostrar la nota o indicar que no está registrado
 if nota_consultada != "No encontrado":
     print(f"La nota de {alumno_a_consultar} es: {nota_consultada}")
 else:
@@ -55,7 +63,7 @@ print("\nTodos los alumnos y sus notas:")
 for alumno, nota in calificaciones.items():
     print(f"{alumno} - {nota}")
 
-#Calcular la nota media
+# Calcular la nota media de la clase
 if calificaciones:
     total_notas = sum(calificaciones.values())
     media = total_notas / len(calificaciones)
@@ -63,8 +71,9 @@ if calificaciones:
 else:
     print("\nNo hay calificaciones para calcular la media.")
 
-# 3. Guardar información en un archivo
+# ---- 3. Guardar información en un archivo ----
 try:
+    # Escribir cada alumno y su nota en un archivo de texto
     with open("alumnos.txt", "w") as archivo:
         for alumno, nota in calificaciones.items():
             archivo.write(f"{alumno} - {nota}\n")

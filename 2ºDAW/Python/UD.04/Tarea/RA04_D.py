@@ -1,7 +1,14 @@
-#RA04_D
-#Lista de productos
+"""
+# RA04_D - Listas vs Tuplas
+
+Explica las diferencias entre listas (mutables) y tuplas (inmutables) en Python,
+con ejemplos prácticos y un caso de uso real para tuplas (coordenadas geográficas).
+"""
+
+# Lista de productos (mutable: se puede modificar tras su creación)
 productos = ["Camisa", "Pantalón", "Zapatos", "Reloj", "Gorra"]
-# Tupla de productos
+
+# Tupla de productos (inmutable: no se puede modificar tras su creación)
 productos_t = ("Camisa", "Pantalón", "Zapatos", "Reloj", "Gorra", "Calcetines")
 
 print("\n--- Diferencias entre Listas y Tuplas ---")
@@ -29,10 +36,11 @@ print("\nEjemplo concreto de cuándo usar una tupla:")
 print("Imagina que estás almacenando las coordenadas geográficas (latitud, longitud) de un punto específico.")
 print("Estas coordenadas son fijas y no deberían cambiar. En este caso, una tupla es la elección ideal.")
 
-coordenadas_ciudad = (40.7128, -74.0060) # Latitud y Longitud de Nueva York
+# Tupla con coordenadas inmutables de una ciudad
+coordenadas_ciudad = (40.7128, -74.0060)  # Latitud y Longitud de Nueva York
 print(f"Coordenadas de la ciudad: {coordenadas_ciudad}")
 print(f"Latitud: {coordenadas_ciudad[0]}, Longitud: {coordenadas_ciudad[1]}")
 
 print("\nIncluso si intentamos modificar la tupla, obtendremos un error llamado TypeError: 'tuple' object does not support item assignment.")
 # Ejemplo de intento de modificación (descomentarlo para ver el error)
-# coordenadas_ciudad[0] = 41.0000  # Esto generará un error
+# coordenadas_ciudad[0] = 41.0000  # Esto generará un TypeError

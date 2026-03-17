@@ -1,10 +1,19 @@
-numeros =[1,3,5,7,9]
+"""
+# Suma de Lista
+
+Calcula la suma de los elementos de una lista de números.
+Se comparan dos enfoques: bucle `for` manual y la función built-in `sum()`.
+"""
+
+numeros = [1, 3, 5, 7, 9]
 suma = 0
-# Realizar la suma de los números en la lista usando un bucle for
+
+# Calcular la suma iterando sobre cada elemento con un bucle for
 for numero in numeros:
-    suma += numero
+    suma += numero  # Acumular el valor en la variable suma
+
 print("La suma es:", suma)
 
-#Se puede utilizar la función sum() para simplificar el código
+# Alternativa más concisa usando la función built-in sum()
 suma_funcion = sum(numeros)
 print("La suma usando la función sum() es:", suma_funcion)
