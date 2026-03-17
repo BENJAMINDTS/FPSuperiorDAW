@@ -62,6 +62,10 @@ El curso está estructurado en 9 unidades didácticas que se corresponden con lo
   - Integración de librerías externas (Big Data, BI).
   - Despliegue de aplicaciones web híbridas.
 
+ - **[Laravel: Primeros Proyectos Laravel](./Laravel)**
+   - Creación de primeros proyectos de laravel
+   - Consumo de apis y vistas basicas
+
 ---
 
 ## 🧩 Buenas Prácticas
