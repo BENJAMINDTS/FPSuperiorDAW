@@ -1,0 +1,4 @@
+Este es un archivo de texto de prueba.
+Contiene varias líneas de contenido.
+Node.js puede leer este archivo con el módulo fs.
+Creado por BenjaminDTS para ejercicios de Node.js.

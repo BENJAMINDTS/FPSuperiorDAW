@@ -96,7 +96,14 @@ build/
 *.ear
 
 # ==========================================
-# 7. SISTEMAS OPERATIVOS Y EDITORES (IDE)
+# 7. CLAUDE AI
+# ==========================================
+.claude/
+.claudeai/
+.agents/
+
+# ==========================================
+# 8. SISTEMAS OPERATIVOS Y EDITORES (IDE)
 # ==========================================
 # macOS
 .DS_Store

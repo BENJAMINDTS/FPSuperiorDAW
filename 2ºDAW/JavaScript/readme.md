@@ -52,6 +52,22 @@ El curso cubre los 7 Resultados de Aprendizaje oficiales, estructurados en las s
   - Consumo de APIs y gestión de respuestas JSON.
   - Actualización dinámica de contenido sin recargar la página.
 
+### 🔵 JQuery
+
+- **[JQuery](./JQuery)**
+  - Selección de elementos y manipulación del **DOM** con jQuery.
+  - Gestión de eventos, efectos y animaciones.
+  - Comunicación asíncrona (**AJAX**) con jQuery.
+
+### 🟢 Node.js
+
+- **[Node.js](./Node)**
+  - Módulos nativos de Node.js: `fs`, `http`.
+  - Creación de módulos propios y exportación de funciones.
+  - Servidor HTTP nativo con enrutamiento manual.
+  - **Express.js:** rutas, parámetros de URL y peticiones POST con JSON.
+  - API REST completa — CRUD de películas. Consulta el [README de Node](./Node/README.md) para instrucciones detalladas.
+
 ---
 
 ## 🧩 Buenas Prácticas
