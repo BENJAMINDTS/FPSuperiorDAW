@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!--
+  @author BenjaminDTS
+
+  Template base del proyecto web_django.
+  Define el layout, estilos globales, fuentes y la barra de navegación
+  que heredan todos los templates de tienda y peliculas.
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django App{% endblock %} · web_django</title>
+
+    <!-- Google Fonts: Inter (body) + Playfair Display (headings) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Variables de diseño ─────────────────────────────────────── */
+        :root {
+            --clr-bg:        #f1f5f9;
+            --clr-surface:   #ffffff;
+            --clr-primary:   #4f46e5;
+            --clr-primary-d: #3730a3;
+            --clr-primary-l: #e0e7ff;
+            --clr-accent:    #f59e0b;
+            --clr-danger:    #ef4444;
+            --clr-danger-d:  #b91c1c;
+            --clr-success:   #10b981;
+            --clr-text:      #1e293b;
+            --clr-muted:     #64748b;
+            --clr-border:    #e2e8f0;
+            --clr-nav-bg:    #1e1b4b;
+            --clr-nav-text:  #c7d2fe;
+            --radius:        0.75rem;
+            --shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+            --shadow-md:     0 4px 16px rgba(0,0,0,.10);
+            --shadow-lg:     0 10px 40px rgba(0,0,0,.12);
+            --transition:    0.2s ease;
+        }
+
+        /* ─── Reset y base ────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            line-height: 1.2;
+        }
+
+        a { color: var(--clr-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ─── Navbar ──────────────────────────────────────────────────── */
+        .navbar {
+            background: var(--clr-nav-bg);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar__brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .navbar__brand span {
+            color: var(--clr-accent);
+        }
+
+        .navbar__links {
+            display: flex;
+            gap: .25rem;
+            list-style: none;
+        }
+
+        .navbar__links a {
+            color: var(--clr-nav-text);
+            padding: .45rem .9rem;
+            border-radius: .5rem;
+            font-size: .9rem;
+            font-weight: 500;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .navbar__links a:hover,
+        .navbar__links a.active {
+            background: rgba(255,255,255,.12);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* ─── Layout principal ────────────────────────────────────────── */
+        .main-wrapper {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* ─── Page header ─────────────────────────────────────────────── */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header__eyebrow {
+            font-size: .8rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--clr-primary);
+            margin-bottom: .35rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            color: var(--clr-text);
+        }
+
+        .page-header p {
+            color: var(--clr-muted);
+            margin-top: .4rem;
+            font-size: .95rem;
+        }
+
+        /* ─── Card ────────────────────────────────────────────────────── */
+        .card {
+            background: var(--clr-surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--clr-border);
+            overflow: hidden;
+        }
+
+        .card-body { padding: 2rem; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        /* ─── Item card (libros / películas) ──────────────────────────── */
+        .item-card {
+            background: var(--clr-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition), transform var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .item-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .item-card__title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--clr-text);
+        }
+
+        .item-card__meta {
+            font-size: .875rem;
+            color: var(--clr-muted);
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .item-card__badge {
+            margin-top: auto;
+            align-self: flex-start;
+            background: var(--clr-primary-l);
+            color: var(--clr-primary-d);
+            font-size: .78rem;
+            font-weight: 600;
+            padding: .25rem .7rem;
+            border-radius: 2rem;
+        }
+
+        .item-card__actions {
+            display: flex;
+            gap: .5rem;
+            margin-top: .5rem;
+            flex-wrap: wrap;
+        }
+
+        /* ─── Buttons ─────────────────────────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .55rem 1.2rem;
+            border-radius: .5rem;
+            font-size: .875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--clr-primary);
+            color: #fff;
+        }
+        .btn-primary:hover { background: var(--clr-primary-d); color: #fff; text-decoration: none; }
+
+        .btn-danger {
+            background: var(--clr-danger);
+            color: #fff;
+        }
+        .btn-danger:hover { background: var(--clr-danger-d); color: #fff; text-decoration: none; }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--clr-primary);
+            border: 2px solid var(--clr-primary);
+        }
+        .btn-outline:hover { background: var(--clr-primary-l); text-decoration: none; }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--clr-muted);
+            border: 1px solid var(--clr-border);
+        }
+        .btn-ghost:hover { background: var(--clr-bg); color: var(--clr-text); text-decoration: none; }
+
+        .btn-success {
+            background: var(--clr-success);
+            color: #fff;
+        }
+        .btn-success:hover { background: #059669; color: #fff; text-decoration: none; }
+
+        /* ─── Alert / mensaje destacado ───────────────────────────────── */
+        .alert {
+            padding: 1.1rem 1.4rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: .95rem;
+            border-left: 4px solid;
+        }
+        .alert-success { background: #ecfdf5; color: #065f46; border-color: var(--clr-success); }
+        .alert-info    { background: var(--clr-primary-l); color: var(--clr-primary-d); border-color: var(--clr-primary); }
+        .alert-warning { background: #fffbeb; color: #92400e; border-color: var(--clr-accent); }
+
+        /* ─── Detail view ─────────────────────────────────────────────── */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .detail-field {
+            background: var(--clr-bg);
+            border-radius: .5rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .detail-field label {
+            display: block;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            color: var(--clr-muted);
+            margin-bottom: .3rem;
+        }
+
+        .detail-field p {
+            font-size: 1.05rem;
+            color: var(--clr-text);
+            font-weight: 500;
+        }
+
+        /* ─── Empty state ─────────────────────────────────────────────── */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--clr-muted);
+        }
+
+        .empty-state__icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h2 {
+            font-size: 1.4rem;
+            color: var(--clr-text);
+            margin-bottom: .5rem;
+        }
+
+        /* ─── Divider ─────────────────────────────────────────────────── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--clr-border);
+            margin: 2rem 0;
+        }
+
+        /* ─── Footer ──────────────────────────────────────────────────── */
+        .footer {
+            background: var(--clr-nav-bg);
+            color: var(--clr-nav-text);
+            text-align: center;
+            padding: 1.25rem;
+            font-size: .82rem;
+        }
+
+        .footer span { color: var(--clr-accent); }
+
+        /* ─── Breadcrumb ──────────────────────────────────────────────── */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .85rem;
+            color: var(--clr-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a { color: var(--clr-primary); }
+        .breadcrumb__sep { color: var(--clr-border); }
+
+        /* ─── Responsive ──────────────────────────────────────────────── */
+        @media (max-width: 640px) {
+            .navbar { padding: 0 1rem; }
+            .navbar__links { gap: 0; }
+            .navbar__links a { padding: .4rem .6rem; font-size: .82rem; }
+            .main-wrapper { padding: 1.5rem 1rem; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Barra de navegación ─────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a href="/" class="navbar__brand" style="text-decoration:none;">
+            &#9670; web_<span>django</span>
+        </a>
+        <ul class="navbar__links">
+            <li><a href="/inicio">Inicio</a></li>
+            <li><a href="/libros">Libros</a></li>
+            <li><a href="/peliculas/">Películas</a></li>
+            <li><a href="/admin">Admin</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── Contenido principal ────────────────────────────────────────── -->
+    <main class="main-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────────────────────── -->
+    <footer class="footer">
+        Proyecto Django &mdash; <span>BenjaminDTS</span> &mdash; Django 6.0
+    </footer>
+
+</body>
+</html>

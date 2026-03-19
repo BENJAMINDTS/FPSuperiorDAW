@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de catálogo de libros - Ejercicio 11.
+-->
+
+{% block title %}Libros{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <p class="page-header__eyebrow">Ejercicio 11</p>
+    <h1>Catálogo de Libros</h1>
+    <p>{{ libros|length }} libro{{ libros|length|pluralize }} en la base de datos.</p>
+</div>
+
+{% if libros %}
+<div class="card-grid">
+    {% for libro in libros %}
+    <div class="item-card">
+        <div style="font-size:2rem;">📖</div>
+        <h3 class="item-card__title">{{ libro.titulo }}</h3>
+        <p class="item-card__meta">✍️ {{ libro.autor }}</p>
+        <span class="item-card__badge">{{ libro.precio }}€</span>
+        <div class="item-card__actions">
+            <a href="/libro/{{ libro.pk }}" class="btn btn-outline" style="font-size:.8rem; padding:.4rem .8rem;">
+                Ver detalle
+            </a>
+            <a href="/libro/{{ libro.pk }}/actualizar" class="btn btn-ghost" style="font-size:.8rem; padding:.4rem .8rem;">
+                ✏️ Precio a 25€
+            </a>
+            <a href="/libro/{{ libro.pk }}/eliminar" class="btn btn-danger" style="font-size:.8rem; padding:.4rem .8rem;"
+               onclick="return confirm('¿Eliminar «{{ libro.titulo }}»?')">
+                🗑️
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+        <div class="empty-state__icon">📭</div>
+        <h2>No hay libros registrados</h2>
+        <p>Accede al panel de administración para insertar libros.</p>
+        <br>
+        <a href="/admin/tienda/libro/add/" class="btn btn-primary">Añadir libro</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

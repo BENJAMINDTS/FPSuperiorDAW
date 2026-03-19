@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de detalle de un libro por ID - Ejercicio 12.
+-->
+
+{% block title %}{{ libro.titulo }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+    <a href="/libros">Libros</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>{{ libro.titulo }}</span>
+</nav>
+
+<div class="page-header">
+    <p class="page-header__eyebrow">Ejercicio 12 · ID #{{ libro.pk }}</p>
+    <h1>{{ libro.titulo }}</h1>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-body">
+        <div class="detail-grid">
+            <div class="detail-field">
+                <label>Título</label>
+                <p>{{ libro.titulo }}</p>
+            </div>
+            <div class="detail-field">
+                <label>Autor</label>
+                <p>{{ libro.autor }}</p>
+            </div>
+            <div class="detail-field">
+                <label>Precio</label>
+                <p style="color: var(--clr-primary); font-size:1.25rem;">{{ libro.precio }}€</p>
+            </div>
+            <div class="detail-field">
+                <label>ID en BD</label>
+                <p>#{{ libro.pk }}</p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+            <a href="/libro/{{ libro.pk }}/actualizar" class="btn btn-success">✏️ Actualizar precio a 25€</a>
+            <a href="/libro/{{ libro.pk }}/eliminar" class="btn btn-danger"
+               onclick="return confirm('¿Eliminar este libro?')">🗑️ Eliminar</a>
+            <a href="/libros" class="btn btn-ghost">← Volver al catálogo</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

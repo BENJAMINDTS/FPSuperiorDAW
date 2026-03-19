@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de catálogo de películas - Ejercicio final.
+-->
+
+{% block title %}Películas{% endblock %}
+
+{% block content %}
+<div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div class="page-header" style="margin-bottom:0;">
+        <p class="page-header__eyebrow">Ejercicio Final</p>
+        <h1>Catálogo de Películas</h1>
+        <p>{{ peliculas|length }} película{{ peliculas|length|pluralize }} registrada{{ peliculas|length|pluralize }}.</p>
+    </div>
+    <a href="/peliculas/insertar" class="btn btn-primary">＋ Insertar película</a>
+</div>
+
+{% if peliculas %}
+<div class="card-grid">
+    {% for pelicula in peliculas %}
+    <div class="item-card">
+        <div style="font-size:2rem;">🎬</div>
+        <h3 class="item-card__title">{{ pelicula.titulo }}</h3>
+        <p class="item-card__meta">🎥 {{ pelicula.director }}</p>
+        <span class="item-card__badge">{{ pelicula.anio }}</span>
+        <div class="item-card__actions">
+            <a href="/peliculas/{{ pelicula.pk }}" class="btn btn-outline" style="font-size:.8rem; padding:.4rem .8rem;">
+                Ver detalle
+            </a>
+            <a href="/peliculas/{{ pelicula.pk }}/actualizar" class="btn btn-ghost" style="font-size:.8rem; padding:.4rem .8rem;">
+                ✏️ Editar
+            </a>
+            <a href="/peliculas/{{ pelicula.pk }}/eliminar" class="btn btn-danger" style="font-size:.8rem; padding:.4rem .8rem;"
+               onclick="return confirm('¿Eliminar «{{ pelicula.titulo }}»?')">
+                🗑️
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+        <div class="empty-state__icon">🎞️</div>
+        <h2>No hay películas registradas</h2>
+        <p>Inserta tu primera película para empezar el catálogo.</p>
+        <br>
+        <a href="/peliculas/insertar" class="btn btn-primary">＋ Insertar película de ejemplo</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

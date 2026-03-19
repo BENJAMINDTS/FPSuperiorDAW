@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de detalle de una película por ID - Ejercicio final.
+-->
+
+{% block title %}{{ pelicula.titulo }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+    <a href="/peliculas/">Películas</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>{{ pelicula.titulo }}</span>
+</nav>
+
+<div class="page-header">
+    <p class="page-header__eyebrow">Ejercicio Final · ID #{{ pelicula.pk }}</p>
+    <h1>{{ pelicula.titulo }}</h1>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-body">
+        <div class="detail-grid">
+            <div class="detail-field" style="grid-column: 1 / -1;">
+                <label>Título</label>
+                <p style="font-size:1.2rem;">{{ pelicula.titulo }}</p>
+            </div>
+            <div class="detail-field">
+                <label>Director</label>
+                <p>{{ pelicula.director }}</p>
+            </div>
+            <div class="detail-field">
+                <label>Año de estreno</label>
+                <p style="color: var(--clr-primary); font-weight:700; font-size:1.2rem;">{{ pelicula.anio }}</p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+            <a href="/peliculas/{{ pelicula.pk }}/actualizar" class="btn btn-success">✏️ Actualizar título</a>
+            <a href="/peliculas/{{ pelicula.pk }}/eliminar" class="btn btn-danger"
+               onclick="return confirm('¿Eliminar esta película?')">🗑️ Eliminar</a>
+            <a href="/peliculas/" class="btn btn-ghost">← Volver al catálogo</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

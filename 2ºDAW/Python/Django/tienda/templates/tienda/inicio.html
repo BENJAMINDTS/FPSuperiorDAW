@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de inicio de la tienda - Ejercicio 6.
+-->
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <p class="page-header__eyebrow">Ejercicio 6</p>
+    <h1>Bienvenido a la aplicación Django</h1>
+    <p>Explora las secciones disponibles desde la barra de navegación.</p>
+</div>
+
+<div class="card-grid">
+    <div class="item-card">
+        <div style="font-size:2rem;">📚</div>
+        <h3 class="item-card__title">Librería</h3>
+        <p class="item-card__meta">Gestiona el catálogo de libros con operaciones CRUD completas.</p>
+        <div class="item-card__actions">
+            <a href="/libros" class="btn btn-primary">Ver libros</a>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div style="font-size:2rem;">🎬</div>
+        <h3 class="item-card__title">Películas</h3>
+        <p class="item-card__meta">Administra el catálogo de películas con su director y año.</p>
+        <div class="item-card__actions">
+            <a href="/peliculas/" class="btn btn-primary">Ver películas</a>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div style="font-size:2rem;">⚙️</div>
+        <h3 class="item-card__title">Administración</h3>
+        <p class="item-card__meta">Panel de control de Django para gestionar todos los modelos.</p>
+        <div class="item-card__actions">
+            <a href="/admin" class="btn btn-outline">Ir al admin</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

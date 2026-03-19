@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+<!--
+  @author BenjaminDTS
+  Template de saludo con variable de contexto - Ejercicio 7.
+-->
+
+{% block title %}Saludo{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <p class="page-header__eyebrow">Ejercicio 7</p>
+    <h1>Saludo personalizado</h1>
+</div>
+
+<div class="card" style="max-width: 480px;">
+    <div class="card-body" style="text-align:center; padding: 3rem 2rem;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">👋</div>
+        <h2 style="font-size: 1.8rem; margin-bottom: .5rem;">Hola {{ nombre }}</h2>
+        <p style="color: var(--clr-muted);">Variable recibida desde la vista Django.</p>
+        <hr class="divider">
+        <a href="/inicio" class="btn btn-ghost">← Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

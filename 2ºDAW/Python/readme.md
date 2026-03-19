@@ -4,6 +4,7 @@ Bienvenido al repositorio de **Python**. Este módulo complementario de 2º DAW 
 
 ## 🛠️ Stack Tecnológico
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
@@ -41,6 +42,14 @@ El curso cubre 5 Resultados de Aprendizaje clave, desde la lógica básica hasta
   - Implementación de Herencia y Encapsulación.
   - **Persistencia:** Conexión con Bases de Datos SQL (vía **SQLite3**).
   - Operaciones CRUD (Crear, Leer, Actualizar, Borrar) desde scripts.
+
+### 🌐 Framework Web: Django
+
+- **[Django: Aplicación Web con MVT](./Django)**
+  - Aplicación práctica con **Django 6**, el framework web de alto nivel para Python.
+  - Amplía los conocimientos de POO y bases de datos de RA05 en un entorno web completo.
+  - Dos aplicaciones: `tienda` (ejercicios 3–14) y `peliculas` (proyecto final CRUD).
+  - Patrón **MVT**, herencia de plantillas, panel de administración y diseño Mobile-First.
 
 ---
 
