@@ -12,7 +12,7 @@ Bienvenido al repositorio de **Python**. Este módulo complementario de 2º DAW 
 
 ## 📚 Temario (Resultados de Aprendizaje)
 
-El curso cubre 5 Resultados de Aprendizaje clave, desde la lógica básica hasta la persistencia de datos:
+El curso cubre 6 Resultados de Aprendizaje clave, desde la lógica básica hasta la persistencia de datos:
 
 ### 🟢 Introducción y Algoritmia
 - **[Tema 1 (RA01): Conceptos Básicos](./UD.01)**
@@ -42,6 +42,12 @@ El curso cubre 5 Resultados de Aprendizaje clave, desde la lógica básica hasta
   - Implementación de Herencia y Encapsulación.
   - **Persistencia:** Conexión con Bases de Datos SQL (vía **SQLite3**).
   - Operaciones CRUD (Crear, Leer, Actualizar, Borrar) desde scripts.
+
+- **[Tema 6 (RA06): Generadores e Iteradores](./UD.06)**
+  - Concepto de **generador** y la sentencia `yield`.
+  - Creación de funciones generadoras que producen valores de forma perezosa (*lazy evaluation*).
+  - Composición de generadores: encadenamiento y filtrado de secuencias.
+  - Ventajas de rendimiento frente a listas convencionales en secuencias grandes.
 
 ### 🌐 Framework Web: Django
 
